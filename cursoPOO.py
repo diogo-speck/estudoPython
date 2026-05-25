@@ -27,7 +27,7 @@ print(f"A soma dos valores {a} + {b} é = {sum(a,b)}")
 print(f"{a/b} >= {a//b}")
 c = a**b
 round(c, 0)
-print(c)
+print("Os valores elevados são", c)
 print(r'C:\this\name')
 print('C:\this\name')
 print("""
@@ -38,9 +38,19 @@ print(3*'bla')
 print("Escrevendo "
       "separado tudo junto"
       " e tudo junto separado")
-d = 'diogo'
+d,e = 'diogo',"teste"
 print(f"{d[-2]}")
 print(f"{d[0:3]}")
+cores = ["azul","vermelho", "amarelo"]
+chroma = cores
+chroma.append("Azul Bebê Jujuba de Maçã Verde")
+print(cores)
+cores = chroma[:]
+cores[-1] = "verde"
+print(cores)
+chroma[:] = []
+print(chroma)
+print(e, end=',')
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
@@ -59,4 +69,14 @@ print(f"{d[0:3]}")
 # String em python é um array que pode ter seus caracteres citados usando o seu índice inclusive negativamente voltando ex. variavel[n]
 # Note that since -0 is the same as 0, negative indices start from -1
 # In addition to indexing, slicing is also supported. While indexing is used to obtain individual characters, slicing allows you to obtain a substring variavel[n:i]
-# Parei na tabela
+# Python strings cannot be changed — they are immutable
+# Strings are examples of sequence types, and support the common operations supported by such types
+# Lists also support operations like concatenation
+# Listas são mutáveis e por isso podem sofrer alterações manualmente pelo seu index ou pelo método list.append()
+# Uma variável nunca copia o dado, ela só o referencia, no caso de uma lista ela vai referenciar aos mesmos itens
+# É possível usar a função len() tanto em Strings quanto em listas
+# In Python, like in C, any non-zero integer value is true; zero is false. 
+# The condition may also be a string or list value, in fact any sequence; 
+# anything with a non-zero length is true, empty sequences are false
+# Quando há uma declaração composta ou um bloco melhor dizendo, é necessário sempre pular uma linha deixando ela em branco para o compilador entender que aquela sequência terminou
+# 4. More Control Flow Tools
