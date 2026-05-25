@@ -17,6 +17,10 @@
 # Atividade: Objeto1(concreto)-computador, classe marca hp, atributo ligado, estado verdadeiro / Objeto2(abstrato)-previsão do tempo, classe dia limpo, atributo chuva, estado falso
 # 
 
+class MyEmptyClass:
+    pass
+    ...
+
 def sum (a,b):
     return a+b
 
@@ -50,7 +54,21 @@ cores[-1] = "verde"
 print(cores)
 chroma[:] = []
 print(chroma)
-print(e, end=',')
+print(e, end=',\n')
+vv = {"Diogo":"Admin", 'Enzo':'Admin', "Jia":'Admin', 'Caique':"Admin", "Gustavo":"Membro", "Gustavo":"Membro", "Gustavo":"Membro", "Hugo":"Membro", "Daniel":"Membro", "Eric":"Membro", "Ferret":"Membro", "João":"Membro", "Malu":"Membro", "Vinícius":"Membro", "Wesley":"Membro"}
+
+for membros, status in vv.copy().items():
+    if status == 'Membro':
+        del vv[membros]
+
+admins = {}
+
+for membros, status in vv.items():
+    if status == "Admin":
+        admins[membros] = status
+
+print(admins)
+
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
@@ -79,4 +97,15 @@ print(e, end=',')
 # The condition may also be a string or list value, in fact any sequence; 
 # anything with a non-zero length is true, empty sequences are false
 # Quando há uma declaração composta ou um bloco melhor dizendo, é necessário sempre pular uma linha deixando ela em branco para o compilador entender que aquela sequência terminou
-# 4. More Control Flow Tools
+# Code that modifies a collection while iterating over that same collection can be tricky to get right. Instead, it is usually more straight-forward to loop over a copy of the collection or to create a new collection
+# Para iterar sequências de números, uma boa opção é usar a função range(), ela gera uma progressão aritimética
+# It is possible to let the range start at another number, or to specify a different increment (even negative; sometimes this is called the ‘step’)
+# Segue esse padrão (começo(incluso), fim(não-incluso), o quanto que vai pular)
+# Uma curiosidade de python é que para salvar desempenho, ele usa itens sucessívos nas sequências invés de criar uma lista
+# We say such an object is iterable, that is, suitable as a target for functions and constructs that expect something from which they can obtain successive items until the supply is exhausted
+# The break statement breaks out of the innermost enclosing for or while loop
+# If a loop finishes without executing the break, the else clause executes
+# Quando usado dessa forma, o else faz mais papel de try exception do que um else por si só
+# Pass não faz nada, só preenche um espaço vazio
+# 4.7. match Statements
+# 
