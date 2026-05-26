@@ -21,8 +21,16 @@ class MyEmptyClass:
     pass
     ...
 
-def sum (a,b):
+def sum (a,b): # função que soma 2 valores
     return a+b
+
+def fib(n):    # função que printa a sequência de Fibonacci até n
+    a, b = 0, 1
+    while a < n:
+        print(a, end=' ')
+        a, b = b, a+b # Atualização simultânea, por isso não precisa salvar o valor anterior de a
+    print()
+
 
 print("Testando a Programação Orientada ao Objeto em Python")
 a = float(input("Digite o 1º valor para somar: "))
@@ -72,18 +80,21 @@ x,y = map(int, input("Insira uma coordenada do plano cartesiano (-1,1 para x=-1 
 point = (x,y)
 match point:
     case (0, 0): # tupla
-        print("Origin")
+        print("Origem")
     case (0, y):
         print(f"Y={y}")
     case (x, 0):
         print(f"X={x}")
     case (x, y) if x == y:
-        print(f"Y=X at {x}")
+        print(f"Y=X em {x}")
     case (x, y):
         print(f"X={x}, Y={y}")
-        print("Not on the diagonal")
+        print("Não está na diagonal")
     case _: # default
-        raise ValueError("Not a point")
+        raise ValueError("Não é um ponto")
+
+f = int(input("Digite o limite para a sequência de Fibonacci: "))
+fib(f)
 
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
@@ -128,4 +139,16 @@ match point:
 # Invés de importar a biblioteca dataclass, quando definindo funções pode apenas definir __match_args__ para dizer para o Python que a ordem a ser seguida é a mesma que definida ex. __match_args__ = ("x", "y")
 # Uma variável var é vazia
 # Like unpacking assignments, tuple and list patterns have exactly the same meaning and actually match arbitrary sequences. An important exception is that they don’t match iterators or strings
-# 4.8. Defining Functions
+# The keyword def introduces a function definition. It must be followed by the function name and the parenthesized list of formal parameters
+# desempacotamento de tupla = Python primeiro calcula o lado direito inteiro
+# Cada função cria seu próprio espaço de variáveis
+# Python adiciona a um dicionário interno as funções criadas dessa maneira: nome da variável -> valor, essa tabela existe só durante a execução da função (temporariamente/local)
+# Mesmo que já exista uma variável "global", ou seja já foi definida no código, mesmo assim é possível criar uma variável com o mesmo nome que não será alterada
+# Primeiro, a função procura dentro dela mesma, depois ela procura no "Enclosing", ou seja dentro de uma nested function(Funções dentro de funções), depois global (definida ao longo do código) e por fim nas Built-ins, que são funções já pré-definidas pelo Python, como len() por exemplo
+# Uma função não consegue alterar o valor de uma variável global a não ser que use global váriavel
+# Para alterar no enclosing usa-se nonlocal
+# Essa diferença de variáveis ocorre, porquê quando refêrenciadas, as funções criam objetos diferentes, que se diferenciam das variáveis
+# Uma função sempre retorna algo, apesar de não ter um return, ela ainda pode retornar algo nulo
+# A method is a function that ‘belongs’ to an object and is named obj.methodname, where obj is some object (this may be an expression), and methodname is the name of a method that is defined by the object’s type
+# Um exemplo de método é o append() de listas
+# 4.9. More on Defining Functions
