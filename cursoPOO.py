@@ -68,6 +68,22 @@ for membros, status in vv.items():
         admins[membros] = status
 
 print(admins)
+x,y = map(int, input("Insira uma coordenada do plano cartesiano (-1,1 para x=-1 e y=1): ").split(",")) # tenta converter cada caractere da string em inteiro
+point = (x,y)
+match point:
+    case (0, 0): # tupla
+        print("Origin")
+    case (0, y):
+        print(f"Y={y}")
+    case (x, 0):
+        print(f"X={x}")
+    case (x, y) if x == y:
+        print(f"Y=X at {x}")
+    case (x, y):
+        print(f"X={x}, Y={y}")
+        print("Not on the diagonal")
+    case _: # default
+        raise ValueError("Not a point")
 
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
@@ -107,5 +123,9 @@ print(admins)
 # If a loop finishes without executing the break, the else clause executes
 # Quando usado dessa forma, o else faz mais papel de try exception do que um else por si só
 # Pass não faz nada, só preenche um espaço vazio
-# 4.7. match Statements
-# 
+# Similar ao switch de java
+# You can use the class name followed by an argument list resembling a constructor, but with the ability to capture attributes into variables
+# Invés de importar a biblioteca dataclass, quando definindo funções pode apenas definir __match_args__ para dizer para o Python que a ordem a ser seguida é a mesma que definida ex. __match_args__ = ("x", "y")
+# Uma variável var é vazia
+# Like unpacking assignments, tuple and list patterns have exactly the same meaning and actually match arbitrary sequences. An important exception is that they don’t match iterators or strings
+# 4.8. Defining Functions
