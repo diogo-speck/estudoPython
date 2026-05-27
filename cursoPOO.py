@@ -17,8 +17,10 @@
 # Atividade: Objeto1(concreto)-computador, classe marca hp, atributo ligado, estado verdadeiro / Objeto2(abstrato)-previsão do tempo, classe dia limpo, atributo chuva, estado falso
 # 
 
+import random
+
 class MyEmptyClass:
-    pass
+    pass # classe de uma função que não faz nada, mas se instânciada a mais de uma váriavel de uma vez só dá erro
     ...
 
 def sum (a,b): # função que soma 2 valores
@@ -30,6 +32,30 @@ def fib(n):    # função que printa a sequência de Fibonacci até n
         print(a, end=' ')
         a, b = b, a+b # Atualização simultânea, por isso não precisa salvar o valor anterior de a
     print()
+
+def ask_ok(prompt, retries=4, reminder='Por favor, tente novamente!'):
+    while True:
+        reply = input(prompt)
+        if reply in {'y', 'ye', 'yes', 's', 'si', 'sim'}:
+            return True
+        if reply in {'n', 'no', 'nop', 'nope', 'na', 'nã', 'nao', 'não'}:
+            return False
+        retries = retries - 1
+        if retries < 0:
+            raise ValueError('Resposta inválida')
+        print(reminder)
+
+def adicionar(item, lista=None):
+    if lista is None: # ou seja, se ela tem algum valor dentro
+        lista = []
+
+    lista.append(item)
+    return lista
+
+def embaralhar(lista):
+    copia = lista[:]
+    random.shuffle(copia)
+    return copia # retorna os argumentos
 
 
 print("Testando a Programação Orientada ao Objeto em Python")
@@ -95,6 +121,29 @@ match point:
 
 f = int(input("Digite o limite para a sequência de Fibonacci: "))
 fib(f)
+resposta = ask_ok("Você está na frente do computador? ", 2, 'Somente sim ou não!')
+if resposta:
+    print("Bom proveito")
+else:
+    print("Entendi, melhor virar então")
+ordem = []
+for i in range(8):
+    bit = adicionar(input("Adicione algo na lista bit, lembrando que ela só adiciona 1 valor por vez porquê simula um bit: "))
+    print(bit)
+    ordem.append(bit)
+print("")
+desordem = embaralhar(ordem)
+for i in range(4):
+    for j in range(2):
+        indice = i * 2 + j
+        print(f"{desordem[indice]}", end="")
+    print("")
+print("")
+for i in range(2):
+    for j in range(4):
+        indice = i * 4 - j
+        print(f"{desordem[indice]}", end="")
+    print("")
 
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
@@ -151,4 +200,19 @@ fib(f)
 # Uma função sempre retorna algo, apesar de não ter um return, ela ainda pode retornar algo nulo
 # A method is a function that ‘belongs’ to an object and is named obj.methodname, where obj is some object (this may be an expression), and methodname is the name of a method that is defined by the object’s type
 # Um exemplo de método é o append() de listas
-# 4.9. More on Defining Functions
+# The in keyword tests whether or not a sequence contains a certain value
+# Os valores padrão dos parâmetros são calculados no momento em que a função é criada, e não quando ela é chamada, dessa maneira a função reutiliza as variáveis
+# As default, functions share subsequent calls
+# In a function call, keyword arguments must follow positional arguments. All the keyword arguments passed must match one of the arguments accepted by the function
+# where / and * are optional. If used, these symbols indicate the kind of parameter by how the arguments may be passed to the function: positional-only, positional-or-keyword, and keyword-only (named parameters)
+# Por padrão se não existir / ou * a função aceita tanto por posição, quanto por variável
+# Use positional-only if you want the name of the parameters to not be available to the user
+# Use keyword-only when names have meaning and the function definition is more understandable by being explicit with names or you want to prevent users relying on the position of the argument being passed
+# For an API, use positional-only to prevent breaking API changes if the parameter’s name is modified in the future
+# O * “espalha” os elementos da lista como argumentos separados, desempacotando-os
+# Like nested function definitions, lambda functions can reference variables from the containing scope
+# Primeira linha da docstring = resumo (deve começar com letra maiúscula, deve terminar com ponto final e não precisa mencionar função, classe etc. exceto se for um verbo)
+# Se houver mais linhas na docstring a segunda linha deve ficar em branco
+# Depois vem o resto, descrição em múltiplas linhas e etc
+# UpperCamelCase for classes and lowercase_with_underscores for functions and methods. Always use self as the name for the first method argument
+# 5. Data Structures
