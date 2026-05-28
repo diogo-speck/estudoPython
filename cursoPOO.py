@@ -18,6 +18,7 @@
 # 
 
 import random
+from collections import deque
 
 class MyEmptyClass:
     pass # classe de uma função que não faz nada, mas se instânciada a mais de uma váriavel de uma vez só dá erro
@@ -56,6 +57,11 @@ def embaralhar(lista):
     copia = lista[:]
     random.shuffle(copia)
     return copia # retorna os argumentos
+
+def remover(lista, item):
+    queue = deque(lista)
+    queue.remove(item)
+    return list(queue) # converte de deque para o tipo lista, essa é a função
 
 
 print("Testando a Programação Orientada ao Objeto em Python")
@@ -145,6 +151,27 @@ for i in range(2):
         print(f"{desordem[indice]}", end="")
     print("")
 
+continuar = True
+add = ""
+lista2= []
+vezes = 0
+while(continuar):
+    add = input("Adicione algo na lista: ")
+    lista2.append(add)
+    confirmar = input(f"{lista2} \nDeseja adicionar algo a mais? (s/n) ")
+    if confirmar == "n":
+        continuar = False
+while(continuar == False):
+    add = input("O que deseja remover: ")
+    vezes = lista2.count(add)
+    if vezes> 0:
+        lista2 = remover(lista2,add) # tem que atribuir o return da função na variável
+    confirmar = input(f"{lista2} \nDeseja remover algo a mais? (s/n) ")
+    if confirmar == "n":
+        continuar = True
+print(f"Sua lista final ficou assim: {lista2}")
+
+
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
@@ -218,4 +245,6 @@ for i in range(2):
 # You might have noticed that methods like insert, remove or sort that only modify the list have no return value printed – they return the default None. This is a design principle for all mutable data structures in Python
 # Not all data can be sorted or compared. For instance, [None, 'hello', 10] doesn’t sort because integers can’t be compared to strings and None can’t be compared to other types.
 # Also, there are some types that don’t have a defined ordering relation. For example, 3+4j < 5+7j isn’t a valid comparison
-# 5.1.1. Using Lists as Stacks
+# Para adicionar algo em uma lista usa-se o método .append e para retirar usa-se .pop
+# Entretanto, para listas maiores que precisam de mais otimização é possível usar a coleção collections.deque para fazer a adição e a remoção de itens
+# 5.1.3. List Comprehensions
