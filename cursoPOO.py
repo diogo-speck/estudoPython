@@ -215,4 +215,7 @@ for i in range(2):
 # Se houver mais linhas na docstring a segunda linha deve ficar em branco
 # Depois vem o resto, descrição em múltiplas linhas e etc
 # UpperCamelCase for classes and lowercase_with_underscores for functions and methods. Always use self as the name for the first method argument
-# 5. Data Structures
+# You might have noticed that methods like insert, remove or sort that only modify the list have no return value printed – they return the default None. This is a design principle for all mutable data structures in Python
+# Not all data can be sorted or compared. For instance, [None, 'hello', 10] doesn’t sort because integers can’t be compared to strings and None can’t be compared to other types.
+# Also, there are some types that don’t have a defined ordering relation. For example, 3+4j < 5+7j isn’t a valid comparison
+# 5.1.1. Using Lists as Stacks
