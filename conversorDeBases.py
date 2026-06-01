@@ -84,6 +84,15 @@ def converterBinarioHexa(txt): #retorna String
     else:
         return "0" # se octal existe, retorna, se não retorna 0
 
+def converterDecimalHexa(num):
+    binario = converterDecimalBinario(num)
+    hexa = converterBinarioHexa(binario)
+    return hexa
+
+def converterOctalHexa(num):
+    binario = converterOctalBinario(num)
+    hexa = converterBinarioHexa(binario)
+    return hexa
 
 continua = True
 while (continua):
@@ -105,9 +114,10 @@ while (continua):
                     print (int(binario))
                 case "o":
                     octal = converterDecimalOctal(decimal)
-                    print(octal)
-                # case "h":
-                #     print(hexa)
+                    print(int(octal))
+                case "h":
+                    hexa = converterDecimalHexa(decimal)
+                    print(hexa)
         case 2:
             binario = (input("A base que você escolheu foi Binário, digite seu número em binário: "))
             escolha = input("Deseja converter para qual tipo? (d,b,o,h) ")
@@ -135,8 +145,9 @@ while (continua):
                     print (int(binario))
                 case "o":
                     print (int(octal))
-                # case "h":
-                #     print(hexa)
+                case "h":
+                    hexa = converterOctalHexa(octal)
+                    print(hexa)
         # case 4:
         #     hexa = input("A base que você escolheu foi Hexadecimal, digite seu número em hexadecimal: ")
         #     escolha = input("Deseja converter para qual tipo? (d,b,o,h) ")
