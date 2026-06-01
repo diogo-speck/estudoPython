@@ -41,8 +41,8 @@ def converterOctalBinario(num):
         for digito in lista: # para n, sendo n todos os digitos(inteiros) na lista pegue o índice e o valor(elemento naquela posição) ao mesmo tempo com a função enumerate
             binario = converterDecimalBinario(int(digito))
             valor.append(str(binario).zfill(3)) # garante 3 bits agrupando eles de 3 em 3, mas só funciona para Strings
-        binario = "".join(valor) # converte int em String com .join para evitar ter 0 a esquerda
-        return binario
+        octal = "".join(valor) # converte int em String com .join para evitar ter 0 a esquerda
+        return octal
     else:
         return "0" # se octal existe, retorna, se não retorna 0
 
@@ -50,6 +50,39 @@ def converterOctalDecimal(num):
     numero = converterOctalBinario(num)
     decimal = converterBinarioDecimal(numero)
     return decimal
+
+def converterBinarioHexa(txt): #retorna String
+    valor = []
+    lista = list(txt)
+    if txt != "0":
+        while len(lista) % 4 != 0: # adiciona 0 a esquerda para ter apenas conjuntos de 4 bits
+            lista.insert(0, "0")
+        # Divide em blocos de 4 bits
+        for i in range(0, len(lista), 4):
+            bloco = lista[i:i+4]
+            bi4 = "".join(bloco)
+            bi4 = int(bi4)
+            match(bi4):
+                case 1010:
+                    valor.append("A")
+                case 1011:
+                    valor.append("B")
+                case 1100:
+                    valor.append("C")
+                case 1101:
+                    valor.append("D")
+                case 1110:
+                    valor.append("E")
+                case 1111:
+                    valor.append("F")
+                case _:
+                    decimal = converterBinarioDecimal(str(bi4))
+                    valor.append(str(decimal))    
+            
+        hexa = "".join(valor).lstrip("0") # converte lista em String com .join e remove os 0 a esquerda
+        return hexa
+    else:
+        return "0" # se octal existe, retorna, se não retorna 0
 
 
 continua = True
@@ -76,7 +109,7 @@ while (continua):
                 # case "h":
                 #     print(hexa)
         case 2:
-            binario = int(input("A base que você escolheu foi Binário, digite seu número em binário: "))
+            binario = (input("A base que você escolheu foi Binário, digite seu número em binário: "))
             escolha = input("Deseja converter para qual tipo? (d,b,o,h) ")
             match escolha:
                 case "d":
@@ -87,8 +120,9 @@ while (continua):
                 case "o":
                     octal = converterBinarioOctal(binario)
                     print (int(octal))
-                # case "h":
-                #     print(hexa)
+                case "h":
+                    hexa = converterBinarioHexa(binario)
+                    print(hexa)
         case 3:
             octal = int(input("A base que você escolheu foi Octal, digite seu número em octal: "))
             escolha = input("Deseja converter para qual tipo? (d,b,o,h) ")
