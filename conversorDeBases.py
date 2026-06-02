@@ -94,13 +94,34 @@ def converterOctalHexa(num):
     hexa = converterBinarioHexa(binario)
     return hexa
 
+def converterHexaDecimal(txt):
+    digitos = "0123456789ABCDEF"
+    txt = txt.upper() # garante letras maiúsculas
+    valor = 0
+    for algarismo in txt:
+        if algarismo not in digitos:
+            return "0" # se hexa não existe, retorna 0
+        valor = valor * 16 + digitos.index(algarismo)
+    decimal = valor
+    return decimal
+
+def converterHexaBinario(txt):
+    decimal = converterHexaDecimal(txt)
+    binario = converterDecimalBinario(decimal)
+    return binario
+
+def converterHexaOctal(txt):
+    decimal = converterHexaDecimal(txt)
+    octal = converterDecimalOctal(decimal)
+    return octal
+
 continua = True
 while (continua):
     print("===Menu===")
     print("1 - Decimal")
     print("2 - Binária")
     print("3 - Octal")
-    # print("4 - Hexadecimal")
+    print("4 - Hexadecimal")
     base = int(input("Informe a base do número que você quer converter: "))
     match base:
         case 1:
@@ -148,18 +169,21 @@ while (continua):
                 case "h":
                     hexa = converterOctalHexa(octal)
                     print(hexa)
-        # case 4:
-        #     hexa = input("A base que você escolheu foi Hexadecimal, digite seu número em hexadecimal: ")
-        #     escolha = input("Deseja converter para qual tipo? (d,b,o,h) ")
-        #     match escolha:
-        #         case "d":
-        #             print (int(decimal))
-        #         case "b":
-        #             print (int(binario))
-        #         case "o":
-        #             print (int(octal))
-        #         case "h":
-        #             print(hexa)
+        case 4:
+            hexa = input("A base que você escolheu foi Hexadecimal, digite seu número em hexadecimal: ").upper()
+            escolha = input("Deseja converter para qual tipo? (d,b,o,h) ")
+            match escolha:
+                case "d":
+                    decimal = converterHexaDecimal(hexa)
+                    print (int(decimal))
+                case "b":
+                    binario = converterHexaBinario(hexa)
+                    print (int(binario))
+                case "o":
+                    octal = converterHexaOctal(hexa)
+                    print (int(octal))
+                case "h":
+                    print(hexa)
     avante = input("Deseja calcular novamente? (s/n) ")
     if avante == "n":
         continua = False
