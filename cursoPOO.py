@@ -171,7 +171,29 @@ while(continuar == False):
         continuar = True
 print(f"Sua lista final ficou assim: {lista2}")
 
+quadrados = [x**2 for x in range(10)]
+print(quadrados)
+print ([(dado1,dado2) for dado1 in [1,2,3,4,5,6] for dado2 in [1,2,3,4,5,6] if x or y])
 
+h = set("mora")
+l = set("gira")
+print(f"O {h} vai {l}")
+
+carrosE = {"BYD" : "Dolphin", 'GWM': 'Haval H6', 'Chevrolet': 'Bolt EV', 'Volvo': "XC60", 'BMW': 'X3', 'Ferrari': None, 'Lamborghini': None, 'McLaren': None}
+# print(carrosE) printa do jeito que está definida
+print(f"Marcas de Carro: {list(carrosE)}")
+print(f"Modelos de carros elétricos: {list(carrosE.values())}")
+carrosE["Ferrari"] = "Luce"
+print(f"O carro elétrico da Ferrari é o {carrosE["Ferrari"]}")
+del carrosE["BYD"] # não funciona porquê é imutável
+carrosE["BYD"] = "Fora de estoque"
+print(f"A atual condição dos carros elétricos da BYD é: {carrosE["BYD"]}\n")
+
+rpg = {'Alaúde,':'o bardo que não cala a boca', 'Pancrácio,':'o guerreiro diplomata da porrada', 'Amnésios,':'o conjurador esquecedor de feitiços', 'Santino,':'o paladino que mais comete pecados', 'Mestre Cuca Beludo,':'o cozinheiro guloso', 'Sr.Manezero,':'o mago esgotado'}
+for nomes, sobre in sorted(rpg.items()): # sorted para organizar em ordem alfabética
+    print(nomes, sobre)
+
+print(0==0.0)
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
@@ -247,4 +269,13 @@ print(f"Sua lista final ficou assim: {lista2}")
 # Also, there are some types that don’t have a defined ordering relation. For example, 3+4j < 5+7j isn’t a valid comparison
 # Para adicionar algo em uma lista usa-se o método .append e para retirar usa-se .pop
 # Entretanto, para listas maiores que precisam de mais otimização é possível usar a coleção collections.deque para fazer a adição e a remoção de itens
-# 5.1.3. List Comprehensions
+# a função del das listas também pode apagar o valor armazenado de uma variável para reutilizá-la novamente
+# tuplas são imutáveis
+# Note that multiple assignment is really just a combination of tuple packing and sequence unpacking.
+# Dicionários podem ser criados de 3 formas: lista de chaves (métodos), compreensão e por meio de construção:
+# Use a comma-separated list of key: value pairs within braces: {'jack': 4098, 'sjoerd': 4127}, dict comprehension: {}, {x: x ** 2 for x in range(10)} & type constructor: dict(), dict([('foo', 100), ('bar', 200)])
+# To loop over two or more sequences at the same time, the entries can be paired with the zip() function
+# Para reverter um for, basta usar a função reversed antes do range
+# usar sorted(set()) em uma lista, é a maneira mais idiomática de organizar uma lista eliminando repetições e colocando em ordem alfabética
+# O ideal sempre que quiser alterar coisas em uma lista em um loop, é usar uma cópia da original
+# 6. Modules
