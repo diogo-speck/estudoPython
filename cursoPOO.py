@@ -20,6 +20,7 @@
 import random
 from collections import deque
 import ipaddress
+import sys
 
 class MyEmptyClass:
     pass # classe de uma função que não faz nada, mas se instânciada a mais de uma váriavel de uma vez só dá erro
@@ -32,10 +33,9 @@ def fib(n):    # função que printa a sequência de Fibonacci até n
     fibo = []
     a, b = 0, 1
     while a < n:
-        print(a, end=' ')
         fibo.append(a)
         a, b = b, a+b # Atualização simultânea, por isso não precisa salvar o valor anterior de a
-    print()
+    return fibo
 
 def ask_ok(prompt, retries=4, reminder='Por favor, tente novamente!'):
     while True:
@@ -140,12 +140,14 @@ match point:
         raise ValueError("Não é um ponto")
 
 f = int(input("Digite o limite para a sequência de Fibonacci: "))
-fib(f)
+print(fib(f))
 resposta = ask_ok("Você está na frente do computador? ", 2, 'Somente sim ou não!')
 if resposta:
     print("Bom proveito")
-else:
+elif resposta == False:
     print("Entendi, melhor virar então")
+else:
+    print("Não precisava responder mesmo")
 ordem = []
 for i in range(8):
     bit = adicionar(input("Adicione algo na lista bit, lembrando que ela só adiciona 1 valor por vez porquê simula um bit: "))
@@ -217,6 +219,9 @@ else:
     estao = "não estão"
 
 print(f"Os IPs {estao} na mesma rede e a distância entre {ip_a} e {ip_b}: {distancia_ipv4(ip_a, ip_b)}") # usando um módulo
+print(sys.path)
+print()
+
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
@@ -302,4 +307,4 @@ print(f"Os IPs {estao} na mesma rede e a distância entre {ip_a} e {ip_b}: {dist
 # usar sorted(set()) em uma lista, é a maneira mais idiomática de organizar uma lista eliminando repetições e colocando em ordem alfabética
 # O ideal sempre que quiser alterar coisas em uma lista em um loop, é usar uma cópia da original
 # módulos são a base para escrever código limpo, reutilizável e escalável em Python, você cria arquivos e cita eles em outros
-# 6.1. More on Modules
+# 7. Input and Output
