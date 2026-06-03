@@ -19,18 +19,21 @@
 
 import random
 from collections import deque
+import ipaddress
 
 class MyEmptyClass:
     pass # classe de uma função que não faz nada, mas se instânciada a mais de uma váriavel de uma vez só dá erro
     ...
 
-def sum (a,b): # função que soma 2 valores
+def soma (a,b): # função que soma 2 valores
     return a+b
 
 def fib(n):    # função que printa a sequência de Fibonacci até n
+    fibo = []
     a, b = 0, 1
     while a < n:
         print(a, end=' ')
+        fibo.append(a)
         a, b = b, a+b # Atualização simultânea, por isso não precisa salvar o valor anterior de a
     print()
 
@@ -63,11 +66,22 @@ def remover(lista, item):
     queue.remove(item)
     return list(queue) # converte de deque para o tipo lista, essa é a função
 
+def distancia_ipv4(ip1: str, ip2: str) -> int:
+    # Retorna a diferença numérica entre dois IPv4
+    addr1 = int(ipaddress.IPv4Address(ip1))
+    addr2 = int(ipaddress.IPv4Address(ip2))
+    return abs(addr1 - addr2)
+
+def mesma_subrede(ip1: str, ip2: str, mascara: str) -> bool:
+    # Verifica se dois IPs estão na mesma sub-rede
+    rede = ipaddress.IPv4Network(mascara, strict=False)
+    return ipaddress.IPv4Address(ip1) in rede and ipaddress.IPv4Address(ip2) in rede
+
 
 print("Testando a Programação Orientada ao Objeto em Python")
 a = float(input("Digite o 1º valor para somar: "))
 b = float(input("Digite o 2º valor para somar: "))
-print(f"A soma dos valores {a} + {b} é = {sum(a,b)}")
+print(f"A soma dos valores {a} + {b} é = {soma(a,b)}")
 print(f"{a/b} >= {a//b}")
 c = a**b
 round(c, 0)
@@ -175,9 +189,9 @@ quadrados = [x**2 for x in range(10)]
 print(quadrados)
 print ([(dado1,dado2) for dado1 in [1,2,3,4,5,6] for dado2 in [1,2,3,4,5,6] if x or y])
 
-h = set("mora")
-l = set("gira")
-print(f"O {h} vai {l}")
+h = set("amora")
+l = set("girar")
+print(f"O {h} vai {l}") # tem chance de ser "O amor vai agir", porquê o set elimina letras repetidas e coloca em uma ordem
 
 carrosE = {"BYD" : "Dolphin", 'GWM': 'Haval H6', 'Chevrolet': 'Bolt EV', 'Volvo': "XC60", 'BMW': 'X3', 'Ferrari': None, 'Lamborghini': None, 'McLaren': None}
 # print(carrosE) printa do jeito que está definida
@@ -194,6 +208,15 @@ for nomes, sobre in sorted(rpg.items()): # sorted para organizar em ordem alfab�
     print(nomes, sobre)
 
 print(0==0.0)
+ip_a = "192.168.0.1"
+ip_b = "192.168.0.100"
+confere = mesma_subrede(ip_a,ip_b,"192.168.0.0/24")
+if confere:
+    estao = "estão"
+else:
+    estao = "não estão"
+
+print(f"Os IPs {estao} na mesma rede e a distância entre {ip_a} e {ip_b}: {distancia_ipv4(ip_a, ip_b)}") # usando um módulo
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
@@ -278,4 +301,5 @@ print(0==0.0)
 # Para reverter um for, basta usar a função reversed antes do range
 # usar sorted(set()) em uma lista, é a maneira mais idiomática de organizar uma lista eliminando repetições e colocando em ordem alfabética
 # O ideal sempre que quiser alterar coisas em uma lista em um loop, é usar uma cópia da original
-# 6. Modules
+# módulos são a base para escrever código limpo, reutilizável e escalável em Python, você cria arquivos e cita eles em outros
+# 6.1. More on Modules
