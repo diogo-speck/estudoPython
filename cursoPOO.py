@@ -21,6 +21,7 @@ import random
 from collections import deque
 import ipaddress
 import sys
+import math
 
 class MyEmptyClass:
     pass # classe de uma função que não faz nada, mas se instânciada a mais de uma váriavel de uma vez só dá erro
@@ -203,7 +204,7 @@ carrosE["Ferrari"] = "Luce"
 print(f"O carro elétrico da Ferrari é o {carrosE["Ferrari"]}")
 del carrosE["BYD"] # não funciona porquê é imutável
 carrosE["BYD"] = "Fora de estoque"
-print(f"A atual condição dos carros elétricos da BYD é: {carrosE["BYD"]}\n")
+print(f"{carrosE["BYD"]=}\n")
 
 rpg = {'Alaúde,':'o bardo que não cala a boca', 'Pancrácio,':'o guerreiro diplomata da porrada', 'Amnésios,':'o conjurador esquecedor de feitiços', 'Santino,':'o paladino que mais comete pecados', 'Mestre Cuca Beludo,':'o cozinheiro guloso', 'Sr.Manezero,':'o mago esgotado'}
 for nomes, sobre in sorted(rpg.items()): # sorted para organizar em ordem alfabética
@@ -218,9 +219,32 @@ if confere:
 else:
     estao = "não estão"
 
-print(f"Os IPs {estao} na mesma rede e a distância entre {ip_a} e {ip_b}: {distancia_ipv4(ip_a, ip_b)}") # usando um módulo
+print(F"Os IPs {estao} na mesma rede e a distância entre {ip_a} e {ip_b}: {distancia_ipv4(ip_a, ip_b)}") # usando um módulo
 print(sys.path)
 print()
+m = 1/3
+print(f"{m:.2f}")
+n = input("Digite um número de celular para conferir se é válido ou não (ex. 5547999999999): ")
+if len(n) == 13:
+    print(f"O número  +{n[0:2]} ({n[2:4]}){n[4:9]}-{n[9:]} é válido")
+else:
+    print(f"O número {n} não é válido")
+print ("I'm an {} who says \"{}\"".format("Owl", "OOO"))
+print()
+o = 10*10 # define o número máximo
+p = math.floor(math.log10(o)) + 1 # define a quantidade de digitos matematicamente
+for i in range(1,11):
+    for j in range(1,11):
+        print(f"{(i*j):{p}d}", end=" ") # formata em p dígitos
+    print()
+print()
+
+# Tabela desalinhada:
+# for i in range(1,11):
+#     for j in range(1,11):
+#         print("{}".format(i*j), end=" ")
+#     print()
+
 
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
@@ -307,4 +331,10 @@ print()
 # usar sorted(set()) em uma lista, é a maneira mais idiomática de organizar uma lista eliminando repetições e colocando em ordem alfabética
 # O ideal sempre que quiser alterar coisas em uma lista em um loop, é usar uma cópia da original
 # módulos são a base para escrever código limpo, reutilizável e escalável em Python, você cria arquivos e cita eles em outros
-# 7. Input and Output
+# When you don’t need fancy output but just want a quick display of some variables for debugging purposes, you can convert any value to a string with the repr() or str() functions
+# For objects which don’t have a particular representation for human consumption, str() will return the same value as repr(). Many values, such as numbers or structures like lists and dictionaries, have the same representation using either function
+# The repr() of a string adds string quotes and backslashes
+# You can use placeholders like $x and replace them with values from a dictionary
+# Também pode usar números para substituir a ordem da posição referenciada na método str.format()
+# len() só serve para sequências (strings, listas, tuplas, etc.)
+# 7.1.3. Manual String Formatting
