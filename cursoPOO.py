@@ -22,6 +22,7 @@ from collections import deque
 import ipaddress
 import sys
 import math
+import json
 
 class MyEmptyClass:
     pass # classe de uma função que não faz nada, mas se instânciada a mais de uma váriavel de uma vez só dá erro
@@ -247,6 +248,48 @@ print()
 
 print('The value of pi is approximately %5.3f.' % math.pi)
 
+# Arquivo JSON
+config = {
+    "usuario": "Diogo",
+    "idioma": "pt-BR",
+    "tema": "escuro",
+    "pontuacao": [10, 20, 30]
+}
+
+# --- Salvando em arquivo JSON ---
+with open("config.json", "w", encoding="utf-8") as f: # escrevendo
+    json.dump(config, f, ensure_ascii=False, indent=4)
+
+print("Configurações salvas em config.json")
+
+# --- Lendo de arquivo JSON ---
+with open("config.json", "r", encoding="utf-8") as f:
+    carregado = json.load(f)
+
+print("Configurações carregadas:", carregado)
+
+# testando o try para abrir um arquivo já usando file.close()
+try: 
+    with open("data.txt", "r") as file:
+        content = file.read()
+        print(content)
+except FileNotFoundError:
+    print("File \"data.txt\" not found.") # não existe
+except Exception as e:
+    print(f"Unexpected error: {e}")
+finally:
+    print("Próximo arquivo") # aparece em qualquer caso, se for no try ou na except
+
+try:
+    with open("config.json", "r") as file: # existe
+        content = file.read()
+        print(content)
+except FileNotFoundError:
+    print("File \"config.json\" not found.")
+except Exception as e:
+    print(f"Unexpected error: {e}")
+finally:
+    print("Eu sou inevitável") # aparece em qualquer caso, se for no try ou na except
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
@@ -341,3 +384,5 @@ print('The value of pi is approximately %5.3f.' % math.pi)
 # O método str.zfill() adiciona zeros a esquerda de uma string numérica
 # Strings são fáceis de salvar e ler em arquivos, mas números e estruturas complexas (listas aninhadas, dicionários) exigem mais trabalho. Por isso, o módulo json do Python simplifica isso
 # O módulo lida bem com listas e dicionários, mas serializar instâncias de classes exige esforço extra
+# In Python, there’s no direct "try-with-resources" keyword like in Java, but the with statement combined with context managers serves the same purpose
+# 8. Errors and Exceptions
