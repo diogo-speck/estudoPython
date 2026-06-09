@@ -245,6 +245,7 @@ print()
 #         print("{}".format(i*j), end=" ")
 #     print()
 
+print('The value of pi is approximately %5.3f.' % math.pi)
 
 
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
@@ -337,4 +338,6 @@ print()
 # You can use placeholders like $x and replace them with values from a dictionary
 # Também pode usar números para substituir a ordem da posição referenciada na método str.format()
 # len() só serve para sequências (strings, listas, tuplas, etc.)
-# 7.1.3. Manual String Formatting
+# O método str.zfill() adiciona zeros a esquerda de uma string numérica
+# Strings são fáceis de salvar e ler em arquivos, mas números e estruturas complexas (listas aninhadas, dicionários) exigem mais trabalho. Por isso, o módulo json do Python simplifica isso
+# O módulo lida bem com listas e dicionários, mas serializar instâncias de classes exige esforço extra
