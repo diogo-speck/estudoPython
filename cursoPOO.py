@@ -385,4 +385,12 @@ finally:
 # Strings são fáceis de salvar e ler em arquivos, mas números e estruturas complexas (listas aninhadas, dicionários) exigem mais trabalho. Por isso, o módulo json do Python simplifica isso
 # O módulo lida bem com listas e dicionários, mas serializar instâncias de classes exige esforço extra
 # In Python, there’s no direct "try-with-resources" keyword like in Java, but the with statement combined with context managers serves the same purpose
-# 8. Errors and Exceptions
+# Existem 2 tipos de erros, sintaxe e exceções
+# o try e o except tem suas verificações executadas simultâneamente
+# A ordem dos excepts seguem a linha de código, então se um except for cumprido antes, outro não ocorre
+# Except também funciona em funções quando chamadas
+# a função raise serve para mostrar um erro
+# A função finally sempre acontece antes da verificação, por isso ocorre de qualquer maneira
+# A função with é um exemplo de clean-up actions
+# except* serve para aglomerar mais de uma exceção dentro de outra ao mesmo tempo
+# 9. Classes
