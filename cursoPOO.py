@@ -28,6 +28,21 @@ class MyEmptyClass:
     pass # classe de uma função que não faz nada, mas se instânciada a mais de uma váriavel de uma vez só dá erro
     ...
 
+class Pessoa:
+    def __init__(self, nome):
+        self.nome = nome
+
+    def alterar_nome(self, novo_nome):
+        self.nome = novo_nome
+
+class Complex:
+    def __init__(self, realpart, imgpart):
+        self.r = realpart
+        self.i = imgpart
+
+    def __str__(self):
+        return f"{self.r}+{self.i}i"
+
 def soma (a,b): # função que soma 2 valores
     return a+b
 
@@ -291,6 +306,28 @@ except Exception as e:
 finally:
     print("Eu sou inevitável") # aparece em qualquer caso, se for no try ou na except
 
+p1 = Pessoa("Maria")
+p2 = p1   # p2 aponta para o mesmo objeto que p1
+
+print(p1.nome)  # Maria
+print(p2.nome)  # Maria
+
+novonome = input("Digite um nome: ")
+p2.alterar_nome(novonome)
+print(p1.nome)  # (mudou tanto o 1 quanto o 2)
+print(p2.nome)
+print("Essas Marias vai com as outras...")
+
+q = Complex("2","3")
+q.r, q.i
+print(q) # se não converter para __str__ ela mostraria apenas o endereço do objeto ex. <__main__.Complex object at 0x00000195D6CBA660>
+r,s = input("Digite um número real e imaginário (no padrão 1 2 para 1+2i): ").split(" ")
+# print(r,s) só printa a tupla
+comp = Complex(r,s)
+print(comp)
+
+
+
 # Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
 # - the high-level data types allow you to express complex operations in a single statement;
@@ -339,6 +376,7 @@ finally:
 # Python adiciona a um dicionário interno as funções criadas dessa maneira: nome da variável -> valor, essa tabela existe só durante a execução da função (temporariamente/local)
 # Mesmo que já exista uma variável "global", ou seja já foi definida no código, mesmo assim é possível criar uma variável com o mesmo nome que não será alterada
 # Primeiro, a função procura dentro dela mesma, depois ela procura no "Enclosing", ou seja dentro de uma nested function(Funções dentro de funções), depois global (definida ao longo do código) e por fim nas Built-ins, que são funções já pré-definidas pelo Python, como len() por exemplo
+
 # Uma função não consegue alterar o valor de uma variável global a não ser que use global váriavel
 # Para alterar no enclosing usa-se nonlocal
 # Essa diferença de variáveis ocorre, porquê quando refêrenciadas, as funções criam objetos diferentes, que se diferenciam das variáveis
@@ -393,4 +431,16 @@ finally:
 # A função finally sempre acontece antes da verificação, por isso ocorre de qualquer maneira
 # A função with é um exemplo de clean-up actions
 # except* serve para aglomerar mais de uma exceção dentro de outra ao mesmo tempo
-# 9. Classes
+# immutable basic types (numbers, strings, tuples)
+# aliases behave like pointers in some respects
+# em python duas ou mais variáveis podem referenciar a um mesmo objeto da mesma classe
+# Em Python, não há ponteiros explícitos nem new/delete. O garbage collector cuida da liberação de memória automaticamente
+# copy.copy() → cópia rasa (shallow copy) e copy.deepcopy() → cópia profunda (deep copy)
+# Em Python, métodos dentro de uma classe devem receber self como primeiro parâmetro, que representa a própria instância
+# In fact, local variables are already determined statically
+# Uma peculiaridade especial do Python é que – se nenhuma declaração global ou nonlocal estiver em vigor – atribuições a nomes sempre vão para o escopo mais interno
+# Parecido com as funções, as classes seguem também uma ordem de prioridade: escopo global -> atribuições global -> atribuições nonlocals -> atribuições locais
+
+# A instânciação usa a mesma notação das funções, só que no lugar de um parâmetro, ela retorna uma nova instância de uma classe
+# Toda classe precisa ter um método especial chamado __init__() por padrão
+# 9.3.3. Instance Objects
