@@ -1,4 +1,4 @@
-# Tipos de base: Decimal, Binária, Octal e Hexadecimal
+# Tipos de base: Decimal, Binária, Octal e Hexadecimal (extra: ASCII)
 def converterDecimalBinario(num):
     restos = []
     while num > 0:
@@ -108,6 +108,8 @@ def converterHexaDecimal(txt):
 def converterHexaBinario(txt):
     decimal = converterHexaDecimal(txt)
     binario = converterDecimalBinario(decimal)
+    if len(binario) % 8 != 0:
+        binario = binario.zfill(len(txt) * 4) # completa com 0
     return binario
 
 def converterHexaOctal(txt):
@@ -115,14 +117,34 @@ def converterHexaOctal(txt):
     octal = converterDecimalOctal(decimal)
     return octal
 
+def converterBinarioAscii(binario):
+    if len(binario) % 8 != 0:
+        raise ValueError("Quantidade de bits deve ser múltipla de 8")
+    
+    return ''.join(
+        chr(int(binario[i:i+8], 2))
+        for i in range(0, len(binario), 8)
+    )
+
+def converterAsciiBinario(txt):
+    return ''.join(format(ord(c), '08b') for c in txt)
+
+def completarByte(binario):
+    return binario.zfill((len(binario) + 7) // 8 * 8)
+    # Completa a string binária até o próximo múltiplo de 8 bits.
+    # Equivalente a essa alternativa, só que mais eficiente (completa tudo de uma vez só):
+    # while len(binario) % 8 != 0:
+    #     binario = "0" + binario
+
 continua = True
 while (continua):
     print("===Menu===")
     print("1 - Decimal")
-    print("2 - Binária")
+    print("2 - Binário")
     print("3 - Octal")
     print("4 - Hexadecimal")
-    base = int(input("Informe a base do número que você quer converter: "))
+    print("5 - ASCII")
+    base = int(input("Informe o que você quer converter: "))
     match base:
         case 1:
             decimal = int(input("A base que você escolheu foi Decimal, digite seu número em decimal: "))
@@ -184,6 +206,40 @@ while (continua):
                     print (int(octal))
                 case "h":
                     print(hexa)
+        case 5:
+            escolha = input("Qual tipo da sua sequência? (d,b,o,h) ")
+            match escolha:
+                case "d":
+                    decimal = int(input("Digite a sequência de decimais: "))
+                    binario = converterDecimalBinario(decimal)
+                    binario = completarByte(binario)
+                    texto = converterBinarioAscii(binario)
+                    print(f"\n{texto}")
+                case "b":
+                    binario = input("Digite a sequência de binários: ").replace(" ","") # remove os espaços
+                    binario = completarByte(binario)
+                    texto = converterBinarioAscii(binario)
+                    print(f"\n{texto}")
+                case "o":
+                    octal = int(input("Digite a sequência de octais: "))
+                    binario = converterOctalBinario(octal)
+                    binario = completarByte(binario)
+                    texto = converterBinarioAscii(binario)
+                    print(f"\n{texto}")
+                case "h":
+                    hexa = input("Digite a sequência de hexadecimais: ")
+                    binario = converterHexaBinario(hexa)
+                    binario = completarByte(binario)
+                    texto = converterBinarioAscii(binario)
+                    print(f"\n{texto}")
+                case _:
+                    print("Você achou a opção secreta, a opção de criptografia")
+                    texto = input("Digite um texto para criptografar em bytes (8 bits) binários: ")
+                    binario = converterAsciiBinario(texto)
+                    binario = completarByte(binario)
+                    print (f"Seu texto criptografado:\n{binario}")
+
+
     avante = input("Deseja calcular novamente? (s/n) ")
     if avante == "n":
         continua = False
