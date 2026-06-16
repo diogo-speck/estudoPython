@@ -443,4 +443,6 @@ print(comp)
 
 # A instânciação usa a mesma notação das funções, só que no lugar de um parâmetro, ela retorna uma nova instância de uma classe
 # Toda classe precisa ter um método especial chamado __init__() por padrão
-# 9.3.3. Instance Objects
+# Data attributes correspond to “instance variables” in Smalltalk, and to “data members” in C++
+# Esses atributos recebem valor mesmo sem serem chamados
+# 9.3.4. Method Objects
