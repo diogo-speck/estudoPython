@@ -23,6 +23,7 @@ import ipaddress
 import sys
 import math
 import json
+from dataclasses import dataclass
 
 class MyEmptyClass:
     pass # classe de uma função que não faz nada, mas se instânciada a mais de uma váriavel de uma vez só dá erro
@@ -34,6 +35,35 @@ class Pessoa:
 
     def alterar_nome(self, novo_nome):
         self.nome = novo_nome
+
+class Animal: #superclasse
+    def __init__(self, especie):
+        self.especie = especie
+
+    def falar(self):
+        print (f"O que {self.especie} fala?")
+    
+class cachorro(Animal): #subclasse
+    def __init__(self):
+        super().__init__("Cachorro" )# chama o init da superclasse
+    
+    def falar(self):
+        super().falar() # chama o método da superclasse
+        print ("Au au")
+
+class gato(Animal): #subclasse
+    def __init__(self):
+        super().__init__("Gato")
+    
+    def falar(self):
+        super().falar()
+        print ("Miau")
+
+@dataclass
+class Employee:
+    name: str
+    dept: str
+    salary: int
 
 class Complex:
     def __init__(self, realpart, imgpart):
@@ -94,6 +124,9 @@ def mesma_subrede(ip1: str, ip2: str, mascara: str) -> bool:
     rede = ipaddress.IPv4Network(mascara, strict=False)
     return ipaddress.IPv4Address(ip1) in rede and ipaddress.IPv4Address(ip2) in rede
 
+def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
 
 print("Testando a Programação Orientada ao Objeto em Python")
 a = float(input("Digite o 1º valor para somar: "))
@@ -103,6 +136,8 @@ print(f"{a/b} >= {a//b}")
 c = a**b
 round(c, 0)
 print("Os valores elevados são", c)
+c = vars
+print(c)
 print(r'C:\this\name')
 print('C:\this\name')
 print("""
@@ -208,9 +243,9 @@ quadrados = [x**2 for x in range(10)]
 print(quadrados)
 print ([(dado1,dado2) for dado1 in [1,2,3,4,5,6] for dado2 in [1,2,3,4,5,6] if x or y])
 
-h = set("amora")
-l = set("girar")
-print(f"O {h} vai {l}") # tem chance de ser "O amor vai agir", porquê o set elimina letras repetidas e coloca em uma ordem
+h = sorted(set(("amora")))
+l = sorted(set(("girar")))
+print(f"O {h} vai {l}") # "O amor vai agir", porquê o set elimina letras repetidas e coloca em ordem alfabética
 
 carrosE = {"BYD" : "Dolphin", 'GWM': 'Haval H6', 'Chevrolet': 'Bolt EV', 'Volvo': "XC60", 'BMW': 'X3', 'Ferrari': None, 'Lamborghini': None, 'McLaren': None}
 # print(carrosE) printa do jeito que está definida
@@ -326,53 +361,52 @@ r,s = input("Digite um número real e imaginário (no padrão 1 2 para 1+2i): ")
 comp = Complex(r,s)
 print(comp)
 
+t = Animal("Raposa")
+u = cachorro()
+v = gato()
+u.falar()
+v.falar()
+t.falar()
+print()
 
+diogo = Employee("Diogo", "TI", 1621)
+print(f"{diogo.name} trabalha no setor de {diogo.dept} e ganha R${diogo.salary},00")
 
-# Depois ler https://docs.python.org/release/3.14.5/tutorial/appetite.html
+w = input("Escreva algo: ")
+for char in reverse(w):
+    print(char, end='')
+list(w[i] for i in range(len(w)-1, -1, -1))
+
 # Python enables programs to be written compactly and readably. Programs written in Python are typically much shorter than equivalent C, C++, or Java programs, for several reasons:
 # - the high-level data types allow you to express complex operations in a single statement;
 # - statement grouping is done by indentation instead of beginning and ending brackets;
 # - no variable or argument declarations are necessary.
-#
-# division always returns a floating-point number
-# To do floor division and get just the integer result you can use the //
+# Todo número resultante de uma divisão é um tipo float (floating-point number)
+# ToDo floor division and get just the integer result you can use the //
 # entre operações de diferentes tipos de variáveis, predomina aquela que engloba a outra nos conjuntos ex. float(int)
 # Strings usam "" ou '' para concatenar caracteres especiais usa-se \(alt 92) "\"" \n pula linha
-# Strings armazenam os caracteres especiais também quando não são printadas
 # print r serve para não realizar as ações usando \ (raw string)
 # print(""" """) serve para fazer um print formatado com multiplas linhas
-# não é possível concatenar uma variável e uma String literal sem + ex. prefix = 'Py' ; prefix 'thon'
-# String em python é um array que pode ter seus caracteres citados usando o seu índice inclusive negativamente voltando ex. variavel[n]
+# String em python é um array que pode ter seus caracteres citados usando o seu índice inclusive negativamente voltando ex. variavel[-n]
 # Note that since -0 is the same as 0, negative indices start from -1
 # In addition to indexing, slicing is also supported. While indexing is used to obtain individual characters, slicing allows you to obtain a substring variavel[n:i]
 # Python strings cannot be changed — they are immutable
 # Strings are examples of sequence types, and support the common operations supported by such types
-# Lists also support operations like concatenation
 # Listas são mutáveis e por isso podem sofrer alterações manualmente pelo seu index ou pelo método list.append()
 # Uma variável nunca copia o dado, ela só o referencia, no caso de uma lista ela vai referenciar aos mesmos itens
 # É possível usar a função len() tanto em Strings quanto em listas
-# In Python, like in C, any non-zero integer value is true; zero is false. 
-# The condition may also be a string or list value, in fact any sequence; 
-# anything with a non-zero length is true, empty sequences are false
+# In Python, like in C, any non-zero integer value is true; zero is false. Anything with a non-zero length is true, empty sequences are false
 # Quando há uma declaração composta ou um bloco melhor dizendo, é necessário sempre pular uma linha deixando ela em branco para o compilador entender que aquela sequência terminou
 # Code that modifies a collection while iterating over that same collection can be tricky to get right. Instead, it is usually more straight-forward to loop over a copy of the collection or to create a new collection
-# Para iterar sequências de números, uma boa opção é usar a função range(), ela gera uma progressão aritimética
-# It is possible to let the range start at another number, or to specify a different increment (even negative; sometimes this is called the ‘step’)
-# Segue esse padrão (começo(incluso), fim(não-incluso), o quanto que vai pular)
-# Uma curiosidade de python é que para salvar desempenho, ele usa itens sucessívos nas sequências invés de criar uma lista
-# We say such an object is iterable, that is, suitable as a target for functions and constructs that expect something from which they can obtain successive items until the supply is exhausted
-# The break statement breaks out of the innermost enclosing for or while loop
-# If a loop finishes without executing the break, the else clause executes
+# Todo intervalo segue esse padrão (começo(incluso), fim(não-incluso), o quanto que vai pular)
+# The break statement breaks out of the innermost enclosing for or while loop. If a loop finishes without executing the break, the else clause executes
 # Quando usado dessa forma, o else faz mais papel de try exception do que um else por si só
-# Pass não faz nada, só preenche um espaço vazio
-# Similar ao switch de java
 # You can use the class name followed by an argument list resembling a constructor, but with the ability to capture attributes into variables
 # Invés de importar a biblioteca dataclass, quando definindo funções pode apenas definir __match_args__ para dizer para o Python que a ordem a ser seguida é a mesma que definida ex. __match_args__ = ("x", "y")
-# Uma variável var é vazia
 # Like unpacking assignments, tuple and list patterns have exactly the same meaning and actually match arbitrary sequences. An important exception is that they don’t match iterators or strings
 # The keyword def introduces a function definition. It must be followed by the function name and the parenthesized list of formal parameters
 # desempacotamento de tupla = Python primeiro calcula o lado direito inteiro
-# Cada função cria seu próprio espaço de variáveis
+# Todo tipo de função cria seu próprio espaço de variáveis
 # Python adiciona a um dicionário interno as funções criadas dessa maneira: nome da variável -> valor, essa tabela existe só durante a execução da função (temporariamente/local)
 # Mesmo que já exista uma variável "global", ou seja já foi definida no código, mesmo assim é possível criar uma variável com o mesmo nome que não será alterada
 # Primeiro, a função procura dentro dela mesma, depois ela procura no "Enclosing", ou seja dentro de uma nested function(Funções dentro de funções), depois global (definida ao longo do código) e por fim nas Built-ins, que são funções já pré-definidas pelo Python, como len() por exemplo
@@ -380,7 +414,7 @@ print(comp)
 # Uma função não consegue alterar o valor de uma variável global a não ser que use global váriavel
 # Para alterar no enclosing usa-se nonlocal
 # Essa diferença de variáveis ocorre, porquê quando refêrenciadas, as funções criam objetos diferentes, que se diferenciam das variáveis
-# Uma função sempre retorna algo, apesar de não ter um return, ela ainda pode retornar algo nulo
+# Todo tipo de função sempre retorna algo, apesar de não ter um return, ela ainda retorna algo nulo. Esse é um padrão que todo tipo de dado mutável em python segue
 # A method is a function that ‘belongs’ to an object and is named obj.methodname, where obj is some object (this may be an expression), and methodname is the name of a method that is defined by the object’s type
 # Um exemplo de método é o append() de listas
 # The in keyword tests whether or not a sequence contains a certain value
@@ -394,31 +428,23 @@ print(comp)
 # For an API, use positional-only to prevent breaking API changes if the parameter’s name is modified in the future
 # O * “espalha” os elementos da lista como argumentos separados, desempacotando-os
 # Like nested function definitions, lambda functions can reference variables from the containing scope
-# Primeira linha da docstring = resumo (deve começar com letra maiúscula, deve terminar com ponto final e não precisa mencionar função, classe etc. exceto se for um verbo)
-# Se houver mais linhas na docstring a segunda linha deve ficar em branco
-# Depois vem o resto, descrição em múltiplas linhas e etc
-# UpperCamelCase for classes and lowercase_with_underscores for functions and methods. Always use self as the name for the first method argument
-# You might have noticed that methods like insert, remove or sort that only modify the list have no return value printed – they return the default None. This is a design principle for all mutable data structures in Python
 # Not all data can be sorted or compared. For instance, [None, 'hello', 10] doesn’t sort because integers can’t be compared to strings and None can’t be compared to other types.
 # Also, there are some types that don’t have a defined ordering relation. For example, 3+4j < 5+7j isn’t a valid comparison
 # Para adicionar algo em uma lista usa-se o método .append e para retirar usa-se .pop
 # Entretanto, para listas maiores que precisam de mais otimização é possível usar a coleção collections.deque para fazer a adição e a remoção de itens
 # a função del das listas também pode apagar o valor armazenado de uma variável para reutilizá-la novamente
-# tuplas são imutáveis
-# Note that multiple assignment is really just a combination of tuple packing and sequence unpacking.
+# Note that multiple assignment is really just a combination of tuple packing and sequence unpacking (tuplas diferentemente das listas, são imutáveis)
 # Dicionários podem ser criados de 3 formas: lista de chaves (métodos), compreensão e por meio de construção:
 # Use a comma-separated list of key: value pairs within braces: {'jack': 4098, 'sjoerd': 4127}, dict comprehension: {}, {x: x ** 2 for x in range(10)} & type constructor: dict(), dict([('foo', 100), ('bar', 200)])
 # To loop over two or more sequences at the same time, the entries can be paired with the zip() function
 # Para reverter um for, basta usar a função reversed antes do range
 # usar sorted(set()) em uma lista, é a maneira mais idiomática de organizar uma lista eliminando repetições e colocando em ordem alfabética
-# O ideal sempre que quiser alterar coisas em uma lista em um loop, é usar uma cópia da original
 # módulos são a base para escrever código limpo, reutilizável e escalável em Python, você cria arquivos e cita eles em outros
 # When you don’t need fancy output but just want a quick display of some variables for debugging purposes, you can convert any value to a string with the repr() or str() functions
 # For objects which don’t have a particular representation for human consumption, str() will return the same value as repr(). Many values, such as numbers or structures like lists and dictionaries, have the same representation using either function
-# The repr() of a string adds string quotes and backslashes
+# The repr() of a string adds string quotes and backslashes (r string)
 # You can use placeholders like $x and replace them with values from a dictionary
 # Também pode usar números para substituir a ordem da posição referenciada na método str.format()
-# len() só serve para sequências (strings, listas, tuplas, etc.)
 # O método str.zfill() adiciona zeros a esquerda de uma string numérica
 # Strings são fáceis de salvar e ler em arquivos, mas números e estruturas complexas (listas aninhadas, dicionários) exigem mais trabalho. Por isso, o módulo json do Python simplifica isso
 # O módulo lida bem com listas e dicionários, mas serializar instâncias de classes exige esforço extra
@@ -431,18 +457,30 @@ print(comp)
 # A função finally sempre acontece antes da verificação, por isso ocorre de qualquer maneira
 # A função with é um exemplo de clean-up actions
 # except* serve para aglomerar mais de uma exceção dentro de outra ao mesmo tempo
-# immutable basic types (numbers, strings, tuples)
 # aliases behave like pointers in some respects
 # em python duas ou mais variáveis podem referenciar a um mesmo objeto da mesma classe
 # Em Python, não há ponteiros explícitos nem new/delete. O garbage collector cuida da liberação de memória automaticamente
 # copy.copy() → cópia rasa (shallow copy) e copy.deepcopy() → cópia profunda (deep copy)
-# Em Python, métodos dentro de uma classe devem receber self como primeiro parâmetro, que representa a própria instância
+# Todo método em Python dentro de uma classe deve receber self como primeiro parâmetro, que representa a própria instância
 # In fact, local variables are already determined statically
 # Uma peculiaridade especial do Python é que – se nenhuma declaração global ou nonlocal estiver em vigor – atribuições a nomes sempre vão para o escopo mais interno
 # Parecido com as funções, as classes seguem também uma ordem de prioridade: escopo global -> atribuições global -> atribuições nonlocals -> atribuições locais
 
 # A instânciação usa a mesma notação das funções, só que no lugar de um parâmetro, ela retorna uma nova instância de uma classe
-# Toda classe precisa ter um método especial chamado __init__() por padrão
+# Todo tipo de classe precisa ter um método especial chamado __init__() por padrão
 # Data attributes correspond to “instance variables” in Smalltalk, and to “data members” in C++
 # Esses atributos recebem valor mesmo sem serem chamados
-# 9.3.4. Method Objects
+# Quando você define uma função dentro de uma classe, ela se torna um método
+# Ao chamar esse método a partir de um objeto (instância da classe), o próprio objeto é automaticamente passado como o primeiro argumento da função (self)
+# Métodos de instância: Permite acessar e modificar atributos do objeto (self); Métodos de classe: construtores alternativos ou métodos que precisam manipular a classe em si (cls); Métodos estáticos: apenas por organização lógica
+# instance variables are for data unique to each instance and class variables are for attributes and methods shared by all instances of the class
+# Um exemplo prático é ao invés de criar uma lista que é compartilhada por todas as instâncias de uma classe, se esse não for o objetivo é claro, criar uma lista nova para cada nova instância, já que elas são mutáveis
+# A ordem de prioridade para atribuir valor a um atributo é primeiro a instância e depois a classe
+# self é uma convenção para padronizar e facilitar a localização das variáveis dentro de uma classe
+# inheritance serve para herdar/referenciar funções super ou sub umas as outras usando super()
+# Todos os métodos de python são do tipo virtual como o de C++
+# Python tem 2 funções de herança embutidas: isinstance() e issubclass()
+# Também é possível fazer heranças múltiplas, seguindo a ordem de referenciação da esquerda para a direita
+# Dataclasses are similar to the Pascal “record” or C “struct”
+# for statement calls iter() on the container object
+# When there are no more elements, __next__() raises a StopIteration exception which tells the for loop to terminate (next())
