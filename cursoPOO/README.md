@@ -18,3 +18,5 @@ Atividade: Objeto1(concreto)-computador, classe marca hp, atributo ligado, estad
 Objeto2(abstrato)-previsão do tempo, classe dia limpo, atributo chuva, estado falso
 Objetos são variáveis, compostas ou não, evoluídas, pois conseguem além de armazenar dados nomeando eles, podem executar funcionalidades
 Atributos = dados; Métodos = Funcionalidades
+Biblioteca rich é uma alternativa para deixar o terminal mais visual
+Aula 06
