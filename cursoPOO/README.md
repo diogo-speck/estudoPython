@@ -19,4 +19,4 @@ Objeto2(abstrato)-previsão do tempo, classe dia limpo, atributo chuva, estado f
 Objetos são variáveis, compostas ou não, evoluídas, pois conseguem além de armazenar dados nomeando eles, podem executar funcionalidades
 Atributos = dados; Métodos = Funcionalidades
 Biblioteca rich é uma alternativa para deixar o terminal mais visual
-Aula 07, conferir o desafio 16
+Aula 07 Pilares da POO

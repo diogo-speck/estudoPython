@@ -13,9 +13,13 @@ class Gamer:
     def __init__(self, nome, nick, jogos=[]):
         self.nome = nome
         self.nick = nick
-        self.jogos = jogos
+        self.jogos = list()
+
     def ficha(self):
-        return Panel(f"Nome real: [black on blue]{self.nome}[/]\nJogos Favoritos: [blue]\n{self.jogos}", title=f"Jogador <{self.nick}>", width=35)
+        conteudo = f"Nome real: [black on blue] {self.nome} [/]\nJogos Favoritos: [blue]"
+        for num, jogo in enumerate(self.jogos): # só a parte do jogo da tupla
+            conteudo+= f"\n :video_game: {jogo}"
+        return Panel(conteudo, title=f"Jogador <{self.nick}>", width=35)
     
     def add_favoritos(self, jogo):
         self.jogos.append(jogo)
@@ -27,3 +31,8 @@ j1.add_favoritos("Sonic")
 j1.add_favoritos("God of War")
 j1.add_favoritos("Fortnite")
 print(j1.ficha())
+
+j2 = Gamer("Olívia Souza", "peach_raivosa")
+j2.add_favoritos("Mario Bros")
+j2.add_favoritos("Call of Duty")
+print(j2.ficha())

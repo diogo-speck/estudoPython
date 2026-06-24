@@ -14,7 +14,7 @@ class Produto:
         self.preco = preco
     def etiqueta(self):
         etiqueta.add_row(f"{self.nome}", f"R${self.preco}")
-        print(etiqueta)
+        return etiqueta
 
 etiqueta = Table(title="Etiquetas")
 etiqueta.add_column("Produtos")
@@ -24,4 +24,5 @@ p1 = Produto("iPhone 17 Pro Max", 25_000.85)
 p2 = Produto("Notebook Gamer", 8_000.00)
 
 p1.etiqueta()
-p2.etiqueta()
+print()
+print(p2.etiqueta())

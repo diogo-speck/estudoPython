@@ -12,11 +12,19 @@ class Caneta:
         self.cor = cor
 
     def escrever(self, frase):
-        return f"[{self.cor}]{frase}"
+        texto = f"[{self.cor}]{frase}"
+        print(texto, end="") # imprime sem pular linha
+        return texto # devolve a string
+    
+    def pular_linha(self, vezes=1):
+        texto = "\n"*vezes
+        print(texto, end="")
+        return texto
     
 c1 = Caneta("blue")
-print(c1.escrever("Escrevendo em Azul\n"))
+c1.escrever("Escrevendo em Azul")
+c1.pular_linha(2)
 c2 = Caneta("green")
-print(c2.escrever("Escrevendo em Verde\n"))
+c2.escrever("Escrevendo em Verde")
 c3 = Caneta("red")
-print(c3.escrever("Escrevendo em Vermelho\n"))
+c3.escrever(" Escrevendo em Vermelho")

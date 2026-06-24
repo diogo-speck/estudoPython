@@ -14,9 +14,15 @@ class ControleRemoto:
         mudarCanal() mudar o canal para "cima/avança" ">" ou para "baixo/volta" "<"
         ex. mudarCanal(c1.canal+1)
     """
+
+    canal_min:int = 1
+    canal_max:int = 10
+    volume_min:int = 0
+    volume_max:int = 10
+
     def __init__(self):
         self.ligado = False
-        self.canal = 0
+        self.canal = 1
         self.volume = 0
     
     def power(self, botao):
@@ -32,28 +38,27 @@ class ControleRemoto:
     
     def mudarVolume(self, volume):
         if self.ligado:
-            if volume >=0:
+            if volume >= ControleRemoto.volume_min:
+                if volume > 10:
+                    volume = 10
+                    return f"Volume máximo já alcançado"
                 self.volume = volume
             else:
                 self.volume = 0
+                return f"Volume minimo já alcançado"
             return f"O volume agora está em {self.volume}"
         else:
             return "Primeiro use o controle para ligar"
         
     def mudarCanal(self, canal):
         if self.ligado:
-            if canal >=0:
-                self.canal = canal
-            else:
-                self.canal = 0
-                return f"Canal não encontrado"
+            self.canal = ((self.canal - 1 + canal) % 10) + 1 # intervalo de 1 a 10
             return f"O canal agora está em {self.canal}"
         else:
             return "Primeiro use o controle para ligar"
 
-funciona = True
 c1 = ControleRemoto()
-while funciona:
+while True:
     print(Panel("@ - Botão Power \n-+ - Volume \n<> - Canal", title="Menu", width=19))
     escolha = input("Escolha: ")
     match(escolha):
@@ -64,8 +69,8 @@ while funciona:
         case "-":
             print(c1.mudarVolume(c1.volume-1))
         case "<":
-            print(c1.mudarCanal(c1.canal-1))
+            print(c1.mudarCanal(-1))
         case ">":
-            print(c1.mudarCanal(c1.canal+1))
+            print(c1.mudarCanal(1))
         case _:
-            funciona = False
+            break
