@@ -19,4 +19,7 @@ Objeto2(abstrato)-previsão do tempo, classe dia limpo, atributo chuva, estado f
 Objetos são variáveis, compostas ou não, evoluídas, pois conseguem além de armazenar dados nomeando eles, podem executar funcionalidades
 Atributos = dados; Métodos = Funcionalidades
 Biblioteca rich é uma alternativa para deixar o terminal mais visual
-Aula 07 Pilares da POO
+4 Pilares da POO: Herança (superclasses e subclasses), Encapsulamento (proteger partes importantes do código), Abstração (capacidade de simplificar as coisas) e Polimorfismo (atividades de mesmo nome de maneiras diferentes)
+Herança em programação é um tipo de relacionamento entre itens gerais (ancestrais) e tipos mais específicos (descendentes) desses itens, que herdam atributos e métodos (características e comportamentos) dos níveis superiores (extensibilidade)
+Principais vantagens: Reútilização de código, organização hierárquica (mais fácil de ler e entender), mais fácil de fazer manutenção e dá suporte ao Polimorfismo
+Generalização do tipo "é um"
