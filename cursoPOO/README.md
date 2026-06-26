@@ -23,3 +23,4 @@ Biblioteca rich é uma alternativa para deixar o terminal mais visual
 Herança em programação é um tipo de relacionamento entre itens gerais (ancestrais) e tipos mais específicos (descendentes) desses itens, que herdam atributos e métodos (características e comportamentos) dos níveis superiores (extensibilidade)
 Principais vantagens: Reútilização de código, organização hierárquica (mais fácil de ler e entender), mais fácil de fazer manutenção e dá suporte ao Polimorfismo
 Generalização do tipo "é um"
+Aula 08 Abstração em Python
