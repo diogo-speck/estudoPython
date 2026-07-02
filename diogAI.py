@@ -1,7 +1,7 @@
 # Usando API do Gemini
 
 from dotenv import load_dotenv
-from google import genai
+from google import * # Todo estava dando erro
 import os
 import sounddevice as sd
 from scipy.io.wavfile import write
@@ -9,7 +9,7 @@ import whisper
 import pyttsx3
 import time
 import subprocess # pode abrir praticamente qualquer programa, até local
-import webbrowser # melhor para links
+import webbrowser # links
 
 # =========================
 # Configurações
@@ -24,7 +24,7 @@ DURACAO = 5
 
 load_dotenv()
 
-client = genai.Client(
+client = genai.Client( # Todo estava dando erro
     api_key=os.getenv("GEMINI_API_KEY")
 )
 

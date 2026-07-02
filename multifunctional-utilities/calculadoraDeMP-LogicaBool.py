@@ -1,8 +1,8 @@
-print("============ MENU ============")
-print("1 - Calculadora de médias ponderadas")
-print("2 - Calculadora de lógica Booleana")
+print("""============ MENU ============
+1 - Calculadora de médias ponderadas
+2 - Calculadora de lógica Booleana""")
 
-try:
+while True:
     escolha = int(input(("Escolha 1 opção: ")))
 
     if escolha == 1:
@@ -16,18 +16,31 @@ try:
             p3 = float (input("Digite a nota da p3: "))
             media = (n1*p1+n2*p2+n3*p3)/10
             if media < 5.75:
-                print (f"Sua média ponderada é: {media}")
-                print ("Infelizmente você terá que pagar mais um semestre $-$")
-            elif media > 5.75 and media <= 10:
-                print (f"Sua média ponderada é: {media}")
-                print ("Parabéns, você foi aprovado")
-            elif 0:
-                print (f"Sua média ponderada é: {media}")
-                print ("Você bateu o recorde de média mais baixa")
+                print (f"Sua média ponderada é: {media} \nInfelizmente você terá que pagar mais um semestre $-$")
+            elif 5.75 < media <= 10:
+                print (f"Sua média ponderada é: {media} \nParabéns, você foi aprovado")
+            elif media == 0:
+                print (f"Sua média ponderada é: {media} \nVocê bateu o recorde de média mais baixa")
             else:
-                print (f"Sua média ponderada seria: {media}")
-                print ("Preencha as notas corretamente por favor")
-        print ("Certo, agora vamos aprender sobre os operadores relacionais então")
+                print (f"Sua média ponderada seria: {media} \nPreencha as notas corretamente por favor")
+        break
+
+    elif escolha == 2:
+        # Ordem de prioridade da lógica boleana
+        print("""==== PRIORIDADE ====
+        () 0
+        not 1
+        e 2
+        xor 3
+        ou 4
+=== Calculadora Booleana ===
+        Use:
+        ! ou não/nao  -> NÃO
+        && ou e       -> E
+        || ou ou      -> OU
+        Valores: verdadeiro ou falso
+        Exemplo: verdadeiro && !falso""")
+
         try:
             a = float (input ("Digite um valor para A: "))
             b = float (input ("Digite um valor para B: "))
@@ -42,21 +55,6 @@ try:
         except ValueError:
             print ("Por favor digite números reais respeitando o padrão")
 
-    elif escolha == 2:
-        # Ordem de prioridade da lógica boleana
-        print ("==== PRIORIDADE ====")
-        print ("() 0")
-        print ("not 1")
-        print ("e 2")
-        print ("xor 3")
-        print ("ou 4")
-        print("=== Calculadora Booleana ===")
-        print("Use:")
-        print("! ou não/nao  -> NÃO")
-        print("&& ou e       -> E")
-        print("|| ou ou      -> OU")
-        print("Valores: verdadeiro ou falso")
-        print("Exemplo: verdadeiro && !falso")
 
         expr = input("Digite a expressão lógica: ").lower()
 
@@ -78,12 +76,11 @@ try:
         try:
             resultado = eval(expr)
             # Converter saída
-            if resultado == True:
+            if resultado:
                 print("Resultado: verdadeiro")
             else:
                 print("Resultado: falso")
         except:
             print("Expressão inválida!")
 
-except ValueError:
-    exit()
+        break
