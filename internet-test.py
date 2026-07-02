@@ -1,3 +1,4 @@
+# Speedtest só que com Python
 import speedtest
 
 st = speedtest.Speedtest()
