@@ -4,7 +4,7 @@ class Pessoa(ABC): # SuperClasse Abstrata
     """
         SuperClasse chamado Pessoa em uma academia abstrata que possui os parâmetros nome, idade e lista de alunos matriculados
         ex. e1 = Pessoa()
-        Possui o método fazerAniversário(): 
+        Possui os métodos fazerAniversário():
         ex. e1.fazerAniversário()
     """
     alunos = []
@@ -15,7 +15,7 @@ class Pessoa(ABC): # SuperClasse Abstrata
     def fazerAniversario(self):
         self.idade+=1
 
-    @abstractmethod # Método Obrigatório
+    @abstractmethod # Métodos Obrigatórios
     def estaNaAcademia(self):
         pass
 
@@ -24,9 +24,9 @@ class Aluno(Pessoa): # SubClasse
         SubClasse derivada da Class Pessoa, que instancia um objeto chamado Aluno e atribui a ele um nome e idade
         (da super classe), além disso também dá a ele um treino, um dia da semana e inicializa-o como não-matriculado
         ex. a1 = Aluno("nome", idade, "treino", "dia")
-        Possui 2 métodos, o método fazerAniversário() da classe Pessoa: 
+        Possui 2 métodos, os métodos fazerAniversário() da classe Pessoa:
         ex. a1.fazerAniversário()
-        E o método fazerMatricula():
+        E os métodos fazerMatricula():
         ex. print(a1.fazerMatricula())
     """
     def __init__(self, nome="", idade=0, treino="A", dia=""):
@@ -62,9 +62,9 @@ class Professor(Pessoa): # SubClasse
         nome e idade (da super classe), além disso também dá a ele um tipo de aula ex. funcional e um nível
         (por padrão superior que é o mínimo para dar aula no Brasil)
         ex. p1 = Professor("nome", idade, "tipo", "nivel")
-        Possui 2 métodos, o método fazerAniversário() da classe Pessoa: 
+        Possui 2 métodos, os métodos fazerAniversário() da classe Pessoa:
         ex. p1.fazerAniversário()
-        E o método darAula():
+        E os métodos darAula():
         ex. print(p1.darAula())
     """
     def __init__(self, nome="", idade=0, tipo="musculação", nivel="superior"):
@@ -84,9 +84,9 @@ class Funcionario(Pessoa): # SubClasse
         SubClasse derivada da Class Pessoa, que instancia um objeto chamado Funcionário e atribui a ele um nome e idade
         (da super classe), além disso também dá a ele um cargo, um setor e inicializa-o com o ponto não-batido
         ex. f1 = Funcionario("nome", idade, "cargo", "setor")
-        Possui 3 métodos, o método fazerAniversário() da classe Pessoa: 
+        Possui 3 métodos, os métodos fazerAniversário() da classe Pessoa:
         ex. f1.fazerAniversário()
-        O método baterPonto():
+        Os métodos baterPonto():
         ex. print(f1.baterPonto())
         E o dunder method __str__ para mostrar os atributos e o estado atual do funcionário:
         ex. print(f1)

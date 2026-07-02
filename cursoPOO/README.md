@@ -33,4 +33,4 @@ Uma classe abstrata pode ter métodos abstratos que deverão ser implementados n
 Quando uma classe abstrata tem um método concreto (que serve para todas as subclasses), chamamos esse método de DRY - Don't Repeat Yourself
 Por padrão o Python não tem métodos abstratos, somente importando o ABC - Abstract Base Classes
 Diferentemente do Java que usa abstract class
-Curso Python POO: Aula 9
+TODO - Curso Python POO: Aula 9
