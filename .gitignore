@@ -18,6 +18,7 @@ venv/
 # Cache
 .pytest_cache/
 .mypy_cache/
+*.json
 
 # Distribuição
 dist/
