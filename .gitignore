@@ -1,9 +1,11 @@
+# Python
 __pycache__/
 *.pyc
-*.env
-*.venv
-*.toml
-*.lock
+.venv/
+.env
+
+# Arquivos do projeto
 *.iml
-*.xml
-*.ideia
+
+# PyCharm
+.idea/
