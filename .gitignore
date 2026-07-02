@@ -1,11 +1,27 @@
-# Python
+# Bytecode
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Ambiente virtual
 .venv/
+venv/
 .env
 
-# Arquivos do projeto
-*.iml
-
-# PyCharm
+# IDEs
 .idea/
+.vscode/
+
+# JetBrains
+*.iml
+*.toml
+
+# Cache
+.pytest_cache/
+.mypy_cache/
+
+# Distribuição
+dist/
+build/
+
+# Dependências
+uv.lock
