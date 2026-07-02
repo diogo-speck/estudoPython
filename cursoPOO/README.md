@@ -23,4 +23,14 @@ Biblioteca rich é uma alternativa para deixar o terminal mais visual
 Herança em programação é um tipo de relacionamento entre itens gerais (ancestrais) e tipos mais específicos (descendentes) desses itens, que herdam atributos e métodos (características e comportamentos) dos níveis superiores (extensibilidade)
 Principais vantagens: Reútilização de código, organização hierárquica (mais fácil de ler e entender), mais fácil de fazer manutenção e dá suporte ao Polimorfismo
 Generalização do tipo "é um"
-Aula 08 Abstração em Python
+Abstração é a prática de ignorar o irrelevante e se focar estritamente no essencial
+Principais vantagens: Maior legibilidade (absorve só o essencial); Padronização (generalização/abstrata); Simplificação (especializada); Segurança (não-detalhamento)
+Abstração de dados - Ignora algumas informações desnecessárias (ex. altura e peso de uma pessoa que vai fazer um cadastro)
+Abstração de processos - Ignora como um método funciona detalhadamente (ele funciona e ponto)
+Método Concreto é um método na classe abstrata que é {abstract} (não-definido ainda) e nunca é instanciada só definida para as subclasses
+Um conjunto de vários métodos abstratos é a interface pública de uma classe
+Uma classe abstrata pode ter métodos abstratos que deverão ser implementados nas subclasses
+Quando uma classe abstrata tem um método concreto (que serve para todas as subclasses), chamamos esse método de DRY - Don't Repeat Yourself
+Por padrão o Python não tem métodos abstratos, somente importando o ABC - Abstract Base Classes
+Diferentemente do Java que usa abstract class
+Curso Python POO: Aula 9
