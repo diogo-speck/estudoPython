@@ -37,7 +37,7 @@ try:
         for i in range(ordem):
             print(filas)
 
-        matriz = (f"{filas} \n{filas} \n{filas}")
+        matriz = f"{filas} \n{filas} \n{filas}"
         
         print(matriz)
 
@@ -45,12 +45,12 @@ try:
         valor = float(input("Insira um valor para duplica-lo: "))
         print (f"Seu valor duplicado é {valor*2}")
         for i in range(2):
-            for i in range (3):
+            for j in range (3):
                 print(i+1)
 
     elif escolha == 3:
         numero = int(input("Digite um valor inteiro: "))
-        if (numero % 2 == 0):
+        if numero % 2 == 0:
             print(f"O número {numero} é par")
         else:
             print(f"O número {numero} é ímpar")
@@ -105,7 +105,7 @@ try:
             for i in range(2, int(num**0.5) + 1):
                 if num % i == 0:  # Se divisível por i
                     eh_primo = False
-            if eh_primo == True:
+            if eh_primo:
                 primos.append(num)
                 ultimo = num
                 # print(num, end=" ")

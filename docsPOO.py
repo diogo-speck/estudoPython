@@ -39,7 +39,7 @@ class Animal: #superclasse
     def falar(self):
         print (f"O que {self.especie} fala?")
     
-class cachorro(Animal): #subclasse
+class Cachorro(Animal): #subclasse
     def __init__(self):
         super().__init__("Cachorro" )# chama o init da superclasse
     
@@ -47,7 +47,7 @@ class cachorro(Animal): #subclasse
         super().falar() # chama o método da superclasse
         print ("Au au")
 
-class gato(Animal): #subclasse
+class Gato(Animal): #subclasse
     def __init__(self):
         super().__init__("Gato")
     
@@ -72,7 +72,7 @@ class Complex:
 def soma (a,b): # função que soma 2 valores
     return a+b
 
-def fib(n):    # função que printa a sequência de Fibonacci até n
+def fib(n):    # função que printa a sequência de Fibonacci até "n"
     fibo = []
     a, b = 0, 1
     while a < n:
@@ -170,7 +170,7 @@ for membros, status in vv.items():
         admins[membros] = status
 
 print(admins)
-x,y = map(int, input("Insira uma coordenada do plano cartesiano (-1,1 para x=-1 e y=1): ").split(",")) # tenta converter cada caractere da string em inteiro
+x,y = map(int, input("Insira uma coordenada do plano cartesiano (-1,1 para x=-1 e y=1): ").split(",")) # tenta converter cada caractere da "string" em inteiro
 point = (x,y)
 match point:
     case (0, 0): # tupla
@@ -192,7 +192,7 @@ print(fib(f))
 resposta = ask_ok("Você está na frente do computador? ", 2, 'Somente sim ou não!')
 if resposta:
     print("Bom proveito")
-elif resposta == False:
+elif not resposta:
     print("Entendi, melhor virar então")
 else:
     print("Não precisava responder mesmo")
@@ -219,13 +219,13 @@ continuar = True
 add = ""
 lista2= []
 vezes = 0
-while(continuar):
+while continuar:
     add = input("Adicione algo na lista: ")
     lista2.append(add)
     confirmar = input(f"{lista2} \nDeseja adicionar algo a mais? (s/n) ")
     if confirmar == "n":
         continuar = False
-while(continuar == False):
+while not continuar:
     add = input("O que deseja remover: ")
     vezes = lista2.count(add)
     if vezes> 0:
@@ -239,9 +239,9 @@ quadrados = [x**2 for x in range(10)]
 print(quadrados)
 print ([(dado1,dado2) for dado1 in [1,2,3,4,5,6] for dado2 in [1,2,3,4,5,6] if x or y])
 
-h = sorted(set(("amora")))
-l = sorted(set(("girar")))
-print(f"O {h} vai {l}") # "O amor vai agir", porquê o set elimina letras repetidas e coloca em ordem alfabética
+h = sorted(set("amora"))
+l = sorted(set("girar"))
+print(f"O {h} vai {l}") # "O amor vai agir" (o "set" elimina letras repetidas e coloca em ordem alfabética)
 
 carrosE = {"BYD" : "Dolphin", 'GWM': 'Haval H6', 'Chevrolet': 'Bolt EV', 'Volvo': "XC60", 'BMW': 'X3', 'Ferrari': None, 'Lamborghini': None, 'McLaren': None}
 # print(carrosE) printa do jeito que está definida
@@ -249,7 +249,7 @@ print(f"Marcas de Carro: {list(carrosE)}")
 print(f"Modelos de carros elétricos: {list(carrosE.values())}")
 carrosE["Ferrari"] = "Luce"
 print(f"O carro elétrico da Ferrari é o {carrosE["Ferrari"]}")
-del carrosE["BYD"] # não funciona porquê é imutável
+del carrosE["BYD"] # não funciona porque é imutável
 carrosE["BYD"] = "Fora de estoque"
 print(f"{carrosE["BYD"]=}\n")
 
@@ -282,7 +282,7 @@ o = 10*10 # define o número máximo
 p = math.floor(math.log10(o)) + 1 # define a quantidade de digitos matematicamente
 for i in range(1,11):
     for j in range(1,11):
-        print(f"{(i*j):{p}d}", end=" ") # formata em p dígitos
+        print(f"{(i*j):{p}d}", end=" ") # formata em "p" dígitos
     print()
 print()
 
@@ -350,16 +350,16 @@ print(p2.nome)
 print("Essas Marias vai com as outras...")
 
 q = Complex("2","3")
-q.r, q.i
-print(q) # se não converter para __str__ ela mostraria apenas o endereço do objeto ex. <__main__.Complex object at 0x00000195D6CBA660>
+# q.r, q.i
+print(q) # Se não converter para __str__ ela mostraria apenas o endereço do objeto ex. <__main__. Complex object at 0x00000195D6CBA660>
 r,s = input("Digite um número real e imaginário (no padrão 1 2 para 1+2i): ").split(" ")
 # print(r,s) só printa a tupla
 comp = Complex(r,s)
 print(comp)
 
 t = Animal("Raposa")
-u = cachorro()
-v = gato()
+u = Cachorro()
+v = Gato()
 u.falar()
 v.falar()
 t.falar()
