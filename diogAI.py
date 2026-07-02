@@ -1,7 +1,7 @@
 # Usando API do Gemini
 
 from dotenv import load_dotenv
-from google import * # Todo estava dando erro
+from google import * # Todo arrumar
 import os
 import sounddevice as sd
 from scipy.io.wavfile import write
@@ -24,7 +24,7 @@ DURACAO = 5
 
 load_dotenv()
 
-client = genai.Client( # Todo estava dando erro
+client = genai.Client( # Todo arrumar
     api_key=os.getenv("GEMINI_API_KEY")
 )
 
