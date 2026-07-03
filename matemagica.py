@@ -1,9 +1,8 @@
 import os
-import math
 
-def confere_data(data):
+def confere_data(datas):
     try:
-        dia, mes, ano = data.split("/")
+        dia, mes, ano = datas.split("/")
         dia = dia.zfill(2)
         mes = mes.zfill(2)
         ano = ano.zfill(4)
@@ -18,7 +17,18 @@ def moeda():
     # Gera 0 (cara) ou 1 (coroa) sem usar random
     return ord(os.urandom(1)) % 2
 
-
+def mdc(x,y): # Algoritmo de Euclides
+    """
+    Exemplo prático Calcular 𝑀 𝐷 𝐶 (270, 192):
+    270 = 192 ⋅ 1 + 78 → 𝑀 𝐷 𝐶 (270, 192) = 𝑀 𝐷 𝐶 (192, 78)
+    192 = 78 ⋅ 2 + 36 → 𝑀 𝐷 𝐶 (192, 78) = 𝑀 𝐷 𝐶 (78, 36)
+    78 = 36 ⋅ 2 + 6 → 𝑀 𝐷 𝐶 (78, 36)= 𝑀 𝐷 𝐶 (36, 6)
+    36 = 6 ⋅ 6 + 0 → 𝑀 𝐷 𝐶 (36, 6) 6
+    Resultado: 𝑀 𝐷 𝐶 (270, 192) = 6.
+    """
+    while y != 0:
+            x, y = y, x%y
+    return x
 
 data = input("Digite uma data para conferir se ela é válida ou não (dd/mm/yyyy): ")
 confere_data(data)
@@ -73,13 +83,10 @@ else:
 m = int(input("Digite um número: "))
 n = int(input("Digite outro número: "))
 
-if m<=0 or n<=0:
-    print(f"Pelo menos um dos números {m} ou {n} NÃO é positivo, logo o Problema da Moeda de Frobenius não funciona")
-elif math.gcd(m, n) != 1: # Se o maior divisor comum não for 1
+if m<=1 or n<=1: # Dá para formar qualquer sequência com 1
+    print(f"Pelo menos um dos números {m} ou {n} NÃO é maior que 1, logo o Problema da Moeda de Frobenius não funciona")
+elif mdc(m, n) != 1: # Se o maior divisor comum não for 1
     print(f"Os números {m} e {n} NÃO são coprimos, logo o Problema da Moeda de Frobenius não funciona")
 else:
     print(f"Os números {m} e {n} são coprimos")
     print(f"O maior número inteiro que NÃO pode ser escrito como combinação linear de {m} e {n} é: {m*n - m - n}")
-
-# Todo Algoritmo de Euclides
-
