@@ -52,6 +52,7 @@ while not acertou:
 # Números narcisistas, números de Armstrong ou números pluperfeitos digital
 # número inteiro que é igual à soma dos seus próprios dígitos elevados à potência do número de dígitos que ele possui
 # ex. 153 e 9474
+
 num = input("Digite um número para conferir se ele é um número narcisista: ")
 expoente = len(num)
 soma=sum(int(digito) ** expoente for digito in num)
@@ -61,8 +62,24 @@ if soma == int(num):
 else:
     print(f"{num} NÃO é narcisista")
 
+# Chicken McNugget Theorem, Problema da Moeda de Frobenius ou Problema do Selo Postal.
+# Dados dois números inteiros positivos e coprimos (que não dividem o mesmo divisor comum além de 1),
+# o maior número inteiro que NÃO pode ser escrito como combinação linear
+# desses dois números (usando apenas soma e multiplicação por inteiros não negativos)
+# é dado por: m*n - m - n
+# ex. 9 e 20: 9 * 20 - 9 - 20 = 151 → não é possível comprar exatamente 151 nuggets
+# Qualquer número maior que 151 pode ser obtido com alguma combinação de 9 e 20
 
+m = int(input("Digite um número: "))
+n = int(input("Digite outro número: "))
 
+if m<=0 or n<=0:
+    print(f"Pelo menos um dos números {m} ou {n} NÃO é positivo, logo o Problema da Moeda de Frobenius não funciona")
+elif math.gcd(m, n) != 1: # Se o maior divisor comum não for 1
+    print(f"Os números {m} e {n} NÃO são coprimos, logo o Problema da Moeda de Frobenius não funciona")
+else:
+    print(f"Os números {m} e {n} são coprimos")
+    print(f"O maior número inteiro que NÃO pode ser escrito como combinação linear de {m} e {n} é: {m*n - m - n}")
 
-# Todo Chicken McNugget Theorem
 # Todo Algoritmo de Euclides
+
