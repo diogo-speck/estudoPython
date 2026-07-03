@@ -28,7 +28,6 @@ acertou = False
 gerados = ""
 contador = 0
 tentativas = 0
-todas = ""
 sequencia = input("Escolha uma sequência de 3 jogadas de cara/coroa (ex. HTT): ").upper()
 
 while not acertou:
@@ -38,18 +37,16 @@ while not acertou:
         else:
             gerados += "T"  # Coroa
         contador += 1
+    contador = 0
 
-    print("Sequência gerada: ", gerados)
-    todas+=gerados
-
-    if gerados == sequencia:
-        print(f"🎉 Você acertou a sequência em {tentativas+1} tentativas!")
-        print(todas)
-        acertou = True
-    else:
-        gerados = ""
-        contador = 0
-        tentativas+=1
+    if len(gerados) >= 3:
+        ultimos3 = gerados[-3:]  # pega os últimos 3
+        if ultimos3 == sequencia:
+            print(f"🎉 Você acertou a sequência em {tentativas+1} tentativas!")
+            print(gerados)
+            acertou = True
+        else:
+            tentativas+=1
 
 
 # Todo Números narcisistas
