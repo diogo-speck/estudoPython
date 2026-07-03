@@ -1,4 +1,5 @@
 import os
+import math
 
 def confere_data(data):
     try:
@@ -48,7 +49,23 @@ while not acertou:
         else:
             tentativas+=1
 
+# Todo Números narcisistas ou números de Armstrong ou números pluperfeitos digital
+# número inteiro que é igual à soma de seus próprios dígitos elevados à potência do número de dígitos que ele possui
+# ex. 153 e 9474
+num = input("Digite um número para conferir se ele é um número narcisista: ")
+expoente = len(num)
+soma=0
 
-# Todo Números narcisistas
+for x in range(expoente):
+    soma+=math.pow(int(num[x]),expoente)
+
+if soma == int(num):
+    print(f"{num} é narcisista")
+else:
+    print(f"{num} NÃO é narcisista")
+
+
+
+
 # Todo Chicken McNugget Theorem
 # Todo Algoritmo de Euclides
