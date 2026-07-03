@@ -49,15 +49,12 @@ while not acertou:
         else:
             tentativas+=1
 
-# Todo Números narcisistas ou números de Armstrong ou números pluperfeitos digital
-# número inteiro que é igual à soma de seus próprios dígitos elevados à potência do número de dígitos que ele possui
+# Números narcisistas, números de Armstrong ou números pluperfeitos digital
+# número inteiro que é igual à soma dos seus próprios dígitos elevados à potência do número de dígitos que ele possui
 # ex. 153 e 9474
 num = input("Digite um número para conferir se ele é um número narcisista: ")
 expoente = len(num)
-soma=0
-
-for x in range(expoente):
-    soma+=math.pow(int(num[x]),expoente)
+soma=sum(int(digito) ** expoente for digito in num)
 
 if soma == int(num):
     print(f"{num} é narcisista")
