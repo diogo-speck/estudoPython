@@ -4,6 +4,7 @@
 
 from abc import ABC, abstractmethod
 from rich import print, inspect
+from rich.panel import Panel
 
 class Funcionario(ABC):
     SAL_MIN = 1621
@@ -20,7 +21,8 @@ class Funcionario(ABC):
     def analisar_sal(self):
         print("Vamos analisar seu salário")
         print(self.calc_sal())
-        return f"O salário líquido mensal do(a) {type(self).__name__}(a) {self.nome} é R${self.sal_liq}, que equivale a {self.sal_liq/Funcionario.SAL_MIN:.2f} salários mínimos"
+        analise =  Panel(f"O salário líquido mensal do(a) [magenta]{type(self).__name__}(a)[/] [blue]{self.nome}[/] é de [green]R${self.sal_liq}[/], que equivale a [yellow]{self.sal_liq/Funcionario.SAL_MIN:.2f} salários mínimos", width=55)
+        return analise
 
 class Mensalista(Funcionario): # CLT paga INSS
     def __init__(self, nome, salario=0):
@@ -35,9 +37,9 @@ class Mensalista(Funcionario): # CLT paga INSS
             return "É melhor manter o salário mínimo"
 
 class Horista(Funcionario): # PJ não paga INSS
-    def __init__(self, nome, valor=0, horas=1): # Valor por cada hora trabalhada e todas as horas trabalhadas no mês
+    def __init__(self, nome, valor=7.37, horas=220): # Valor por cada hora trabalhada e todas as horas trabalhadas no mês
         self.sal_bruto = valor*horas
-        super().__init__(nome, self.sal_bruto)
+        super().__init__(nome, int(self.sal_bruto))
         self.valor_hora = valor
         self.horas_trab = horas
         print(f"O(a) {type(self).__name__}(a) {self.nome} trabalha no modelo PJ")
@@ -55,3 +57,9 @@ print(f1.analisar_sal())
 
 f2 = Mensalista("Amanda", 9500) # CLT
 print(f2.analisar_sal())
+
+f3 = Mensalista("José da Silva", 8500)
+print(f3.analisar_sal())
+
+f4 = Horista("Maria de Souza", 25, 250)
+print(f4.analisar_sal())

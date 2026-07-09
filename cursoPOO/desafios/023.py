@@ -21,7 +21,7 @@ class Poligono(ABC):
 
 class Quadrado(Poligono):
 
-    def __init__(self, comprimento):
+    def __init__(self, comprimento=1):
         super().__init__(4)
         self.comprimento = comprimento
         print("Quadrado criado")
@@ -34,7 +34,7 @@ class Quadrado(Poligono):
 
 class Circulo(Poligono):
 
-    def __init__(self, raio):
+    def __init__(self, raio=1):
         super().__init__(0)
         self.raio = raio
         print("Círculo criado")
@@ -54,9 +54,9 @@ p1 = Quadrado(12)
 print(p1.perimetro())
 print(p1.area())
 
-p2 = Circulo(20)
+p2 = Circulo()
 print(p2.perimetro())
 print(p2.area())
 
-inspect(p1)
-inspect(p2)
+#inspect(p1)
+#inspect(p2)

@@ -4,16 +4,14 @@
 from abc import ABC, abstractmethod
 from rich import print, inspect
 
-class BebidaQuente(ABC):
-    def __init__(self):
-        pass
+class BebidaQuente(ABC): # Não precisa dar __init__ porque não tem atributos
 
     def preparar(self) -> None:
-        print("--- Iniciando o Preparo ---")
+        print(f"--- Iniciando o Preparo do {type(self).__name__} ---")
         self.ferver_agua()
         self.misturar()
         self.servir()
-        print("--- Bebida Pronta ---")
+        print("--- Bebida Pronta ---\n")
 
     def ferver_agua(self):
         print("1. Fervendo água a 100ºC.")
@@ -28,8 +26,6 @@ class BebidaQuente(ABC):
 
 
 class Cafe(BebidaQuente):
-    def __init__(self):
-        super().__init__()
 
     def misturar(self):
         print("2. Passando água pressurizada pelo pó de café moído.")
@@ -39,8 +35,6 @@ class Cafe(BebidaQuente):
 
 
 class Cha(BebidaQuente):
-    def __init__(self):
-        super().__init__()
 
     def misturar(self):
         print("2. Mergunlhando o sachê de ervas na água.")
@@ -50,8 +44,6 @@ class Cha(BebidaQuente):
 
 
 class Leite(BebidaQuente):
-    def __init__(self):
-        super().__init__()
 
     def misturar(self):
         print("2. Passando vapor pressurizado pelo bico de leite.")
@@ -61,6 +53,7 @@ class Leite(BebidaQuente):
 
 
 class CafeComLeite(Cafe,Leite):
+
     def misturar(self):
         Cafe.misturar(self)
         Leite.misturar(self)
@@ -73,9 +66,9 @@ class CafeComLeite(Cafe,Leite):
 
 cafeP = Cafe()
 cafeP.preparar()
-print()
 chazin = Cha()
 chazin.preparar()
-print()
 pingado = CafeComLeite()
 pingado.preparar()
+#leitin = Leite()
+#leitin.preparar()

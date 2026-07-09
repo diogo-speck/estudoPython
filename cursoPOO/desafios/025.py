@@ -3,9 +3,10 @@
 
 from abc import ABC, abstractmethod
 from rich import print, inspect
+from rich.table import Table
 
 class Transporte(ABC):
-    def __init__(self, km, item):
+    def __init__(self, km, item="item"):
         self.distancia = km
         self.frete = item
 
@@ -16,30 +17,42 @@ class Transporte(ABC):
 class Moto(Transporte): # Livre
     fator = 0.5
     def calc_frete(self):
-        return f"Para fretar um(a) {self.frete} de {type(self).__name__} em {self.distancia}Km é necessário R${self.distancia*self.fator:,.2f}"
+        return f"Para fretar {self.distancia} Km é necessário [green]R${self.distancia*self.fator:,.2f}"
 
 class Caminhao(Transporte): # Mínimo 50km
     fator = 1.2
     def calc_frete(self):
         if self.distancia >= 50:
-            return f"Para fretar um(a) {self.frete} de {type(self).__name__} em {self.distancia}Km é necessário R${self.distancia * self.fator:,.2f}"
+            return f"Para fretar {self.distancia} Km é necessário [green]R${self.distancia * self.fator:,.2f}"
         else:
-            return f"Não compensa fretar um(a) {self.frete} de {type(self).__name__} por conta da distância curta de {self.distancia}Km"
+            return f"Não compensa fretar a distância de {self.distancia}Km"
 
 class Drone(Transporte): # Máximo 10km
     fator = 9.5
     def calc_frete(self):
         if self.distancia <= 10:
-            return f"Para fretar um(a) {self.frete} de {type(self).__name__} em {self.distancia}Km é necessário R${self.distancia * self.fator:,.2f}"
+            return f"Para fretar {self.distancia} Km é necessário [green]R${self.distancia * self.fator:,.2f}"
         else:
-            return f"O {type(self).__name__} não consegue fretar um(a) {self.frete} por {self.distancia}Km por conta da sua bateria"
+            return f"Distância de {self.distancia} Km muito longa para fretar"
 
 
 e1 = Moto(20, "remédio")
-print(e1.calc_frete())
-
+e1.calc_frete()
 e2 = Caminhao(80, "mudança")
-print(e2.calc_frete())
-
+e2.calc_frete()
 e3 = Drone(8, "delivery")
-print(e3.calc_frete())
+e3.calc_frete()
+
+dist = 80
+
+viagens = [Moto(dist), Caminhao(dist), Drone(dist)]
+
+tabela = Table(title="Tabela de Fretes")
+tabela.add_column("Distância", justify="center")
+tabela.add_column("Tipo", justify="center")
+tabela.add_column("Frete", justify="left")
+
+for viagem in viagens:
+    tabela.add_row(f"{viagem.distancia} Km", f"{type(viagem).__name__}", f"{viagem.calc_frete()}")
+
+print(tabela)
