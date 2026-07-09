@@ -20,12 +20,12 @@ class Funcionario(ABC):
     def analisar_sal(self):
         print("Vamos analisar seu salário")
         print(self.calc_sal())
-        return f"O salário líquido mensal do(a) {type(self).__name__}(a) {self.nome} é R${self.sal_liq}"
+        return f"O salário líquido mensal do(a) {type(self).__name__}(a) {self.nome} é R${self.sal_liq}, que equivale a {self.sal_liq/Funcionario.SAL_MIN:.2f} salários mínimos"
 
 class Mensalista(Funcionario): # CLT paga INSS
     def __init__(self, nome, salario=0):
         super().__init__(nome, salario)
-        print(f"O(a) {type(self).__name__}(a) {self.nome} trabalha no modelo CLT")
+        print(f"O(a) {type(self).__name__} {self.nome} trabalha no modelo CLT")
 
     def calc_sal(self):
         if self.sal_bruto * (1 - (Funcionario.INSS / 100)) > Funcionario.SAL_MIN:
