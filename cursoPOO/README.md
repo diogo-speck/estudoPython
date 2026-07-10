@@ -12,7 +12,7 @@ Mais fácil de entender: (Classe = Molde) != Objeto
 atributos (coisas que a classe vai ter) e métodos (coisas que eu posso fazer com a classe) ()
 Instância = ação de instanciar/seguir o padrão da classe para criar o objeto
 "Um objeto é uma instância de uma classe, definido por algo material/abstrato a partir de uma classe, descrito por seus atributos, métodos e estado"
-Todo atributo tem valores de um estado
+Todos os atributos têm valores de um estado
 Ex. Objeto biscoito, instanciar a Classe molde de coração (colocar no molde), atributo inteiro, estado verdadeiro, método comer (muda o estado)
 Atividade: Objeto1(concreto)-computador, classe marca hp, atributo ligado, estado verdadeiro 
 Objeto2(abstrato)-previsão do tempo, classe: dia limpo, atributo chuva, estado falso
@@ -41,4 +41,6 @@ Protegido - Disponível para a Classe principal e as subclasses
 Privado - Somente na Classe principal
 Em Python há uma convenção, mas ele não proíbe a mudança Exemplo de Python
 Por padrão Público não tem nada antes, Protegido tem um "_" antes e Privado tem "__" antes
-Aula 11 Encapsulamento: Getters, Setters e @Property (Parte2)
+Acesso a dados de Encapsulamento → Getters/"Setters" (métodos acessores tipo Java) e @property (no caso do Python)
+"set" determina o que pode e o que não pode e "get" recebe o valor após passar pelo "set"
+Aula 12 - DOMINE Encapsulamento em Python com Getters, 'Setters' e 6 Projetos Reais
