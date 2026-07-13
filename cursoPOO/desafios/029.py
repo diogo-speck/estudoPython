@@ -1,6 +1,5 @@
 # Implemente uma Classe Diario, onde vamos simular o funcionamento de um diário secreto com senha
 from rich import print, inspect
-from rich.panel import Panel
 
 class Diario:
     """
@@ -40,3 +39,5 @@ d1.escrever("Aqui o segredo é secreto")
 print(d1.ler())
 print(d1.ler("1234"))
 print(d1.ler("123"))
+
+inspect(d1, private=True, methods=True)
