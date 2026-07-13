@@ -16,16 +16,26 @@ class Credencial:
 
     def __init__(self, senha=""):
         self.__cifra = random.randint(1,26)
-        self.senha = senha # Chama o 'Setter'
+        self.__hash = self.__criptografar(senha)
+        self.__senha = senha.upper()
+        del self.__senha      # apaga a senha após gerar o hash
 
     @property
     def senha(self):
         return self.__senha
 
-    @senha.setter
-    def senha(self, valor):
-        self.__senha = valor.upper()
-        self.__hash = self.__criptografar(self.__senha)
+    @senha.deleter
+    def senha(self):
+        # remove o atributo interno __senha
+        del self.__senha
+
+    @property
+    def hash(self):
+        return self.__hash
+
+    @property
+    def cifra(self):
+        return self.__cifra
 
     def __criptografar(self, texto):
         resultado = ""
@@ -42,11 +52,14 @@ class Credencial:
 
 
 c1 = Credencial("Diogo")
-c1.senha = "Diogo"
-print(c1.senha)
 inspect(c1, private=True, methods=True)
-c1.validar("dIoGo")
-print(c1.senha)
-print("Senha original:", c1.senha)
+
+print("Hash:", c1.hash)
+# print("Cifra:", c1.cifra)
 print("Validação correta:", c1.validar("Diogo"))  # True
 print("Validação errada:", c1.validar("123"))     # False
+
+cripto = input("Digite algo para ser criptografado: ")
+c2 = Credencial(cripto)
+print("Seu texto criptografado:")
+print(c2.hash)
