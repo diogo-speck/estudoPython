@@ -1,5 +1,5 @@
 # Implemente uma Classe Termostato, onde vamos simular o funcionamento de um termostato simples
-from rich import print
+from rich import print, inspect
 from rich.panel import Panel
 
 class Termostato:
@@ -53,6 +53,11 @@ class Termostato:
 
 
 t1 = Termostato()
+
+t1.setTemp(25)
+inspect(t1, private=True, methods=True)
+print(f"A temperatura atual é {t1.get_temp_value()}")
+
 while True:
     print(Panel("+ - Aumenta a Temperatura \n- - Diminui a Temperatura \n16-30 - Escolhe a Temperatura", title="Menu", width=40))
     escolha = input("Escolha: ")
