@@ -1,5 +1,5 @@
 from rich import print, inspect
-from classesEx005 import * # importando as classes do módulo classesEx004
+from classesEx005 import * # importando as classes do módulo classesEx005
 
 def main():
     a1 = Aluno("José", 17, "Peito", "Segunda")
