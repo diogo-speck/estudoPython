@@ -43,4 +43,3 @@ Em Python há uma convenção, mas ele não proíbe a mudança Exemplo de Python
 Por padrão Público não tem nada antes, Protegido tem um "_" antes e Privado tem "__" antes
 Acesso a dados de Encapsulamento → Getters/"Setters" (métodos acessores tipo Java) e @property (no caso do Python)
 "set" determina o que pode e o que não pode e "get" recebe o valor após passar pelo "set"
-Aula 12 - DOMINE Encapsulamento em Python com Getters, 'Setters' e 6 Projetos Reais
