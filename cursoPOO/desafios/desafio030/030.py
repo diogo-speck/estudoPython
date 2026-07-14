@@ -3,11 +3,9 @@ from Credencial030 import *
 def __main__():
     c1 = Credencial("Diogo")
     inspect(c1, private=True, methods=True)
-
-    print("Hash:", c1.hash)
-    print("Cifra:", c1.cifra)
-    print("Validação correta:", c1.validar("Diogo"))  # True
-    print("Validação errada:", c1.validar("123"))     # False
+    print(c1.hash)
+    print(c1.validar("123"))
+    print(c1.validar(" Diogo "))
 
     cripto = input("Digite algo para ser criptografado: ")
     c2 = Credencial(cripto)

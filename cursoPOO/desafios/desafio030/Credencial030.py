@@ -17,7 +17,7 @@ class Credencial:
     def __init__(self, senha=""):
         self.__cifra = random.randint(1,26)
         self.__hash = self.__criptografar(senha)
-        self.__senha = senha.upper()
+        self.__senha = senha.upper().strip()
         del self.__senha      # apaga a senha após gerar o hash
 
     @property
@@ -39,7 +39,7 @@ class Credencial:
 
     def __criptografar(self, texto):
         resultado = ""
-        for letra in texto.upper():
+        for letra in texto.upper().strip():
             if letra in self.letras:
                 idx = (self.letras.index(letra) + self.__cifra) % 25
                 resultado += self.letras[idx]
