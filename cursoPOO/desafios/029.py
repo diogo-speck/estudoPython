@@ -15,29 +15,50 @@ class Diario:
 
     def __init__(self, senha=""):
         self.__segredos = []
-        self.__senha = senha
+        self.__senha = senha.strip()
+
+    @property
+    def senha(self):
+        raise PermissionError("Ninguém tem permissão para ver a senha")
+
+    @senha.setter
+    def senha(self, senha= None):
+        if senha == self.__senha:
+            print("[green]Senha Correta - Liberado ✅ [/]")
+            nsenha = input("Digite sua nova senha: ")
+            self.__senha = nsenha
+        else:
+            print("Não foi possível mudar sua senha")
+            raise PermissionError("Senha incorreta")
 
     def escrever(self, msg):
-        self.__segredos.append(msg)
-        print(f"Mensagem escrita")
+        if isinstance(msg, str) and len(msg) > 0:
+            self.__segredos.append(msg)
+            print(f"Mensagem escrita")
+        else:
+            print(f"Mensagem inválida")
 
     def ler(self, senha=""):
         if senha == self.__senha:
-            texto = ""
+            texto = "[green]Senha Correta - Liberado ✅ [/] \n\n"
             for segredo in self.__segredos:
                 texto+=f"{segredo}"
             return texto
         else:
-            return f"Senha incorreta"
+            raise PermissionError("Senha incorreta")
 
 
 d1 = Diario("123")
 
 d1.escrever("Bem-Vindo ao diário\n")
 d1.escrever("Aqui o segredo é secreto")
-
-print(d1.ler())
-print(d1.ler("1234"))
-print(d1.ler("123"))
+try:
+    print(d1.ler("123"))
+except PermissionError as e:
+    print(f"[red]Erro: {e}")
+try:
+    d1.senha = "123"
+except PermissionError as e:
+    print(f"[red]Erro: {e}")
 
 inspect(d1, private=True, methods=True)
