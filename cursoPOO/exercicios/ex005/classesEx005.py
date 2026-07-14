@@ -9,11 +9,12 @@ class Pessoa(ABC): # SuperClasse Abstrata
     """
     alunos = []
     def __init__(self, nome="", idade=0):
-        self.nome = nome
+        self._nome = nome
         self.idade = idade
-    
+
     def fazerAniversario(self):
         self.idade+=1
+        print(f"{self._nome} fez aniversário ({self.idade} anos)")
 
     @abstractmethod # Métodos Obrigatórios
     def estaNaAcademia(self):
@@ -37,23 +38,23 @@ class Aluno(Pessoa): # SubClasse
 
     def fazerMatricula(self):
         if self.matriculado:
-            return f"O(a) aluno(a) [green]{self.nome}[/] já está matriculado"
+            return f"O(a) aluno(a) [green]{self._nome}[/] já está matriculado"
         else:
             self.matriculado = True
-            Pessoa.alunos.append(self.nome)
-            return f"O(a) aluno(a) [green]{self.nome}[/] foi matriculado"
+            Pessoa.alunos.append(self._nome)
+            return f"O(a) aluno(a) [green]{self._nome}[/] foi matriculado"
 
     def malhar(self, treinoatual="", diaatual=""):
         if treinoatual == "":
             treinoatual = self.treino
         if diaatual == "":
             diaatual = self.dia
-        print(f"O último treino do(a) {self.nome} foi {self.treino} na(o) {self.dia}")
+        print(f"O último treino do(a) {self._nome} foi {self.treino} na(o) {self.dia}")
         self.treino, self.dia = treinoatual, diaatual
         return f"Hoje é [blue]{diaatual}[/] e seu treino é [red]{treinoatual}"
 
     def estaNaAcademia(self):
-        return f"O(a) aluno(a) {self.nome} está na academia treinando {self.treino} na {self.dia}"
+        return f"O(a) aluno(a) {self._nome} está na academia treinando {self.treino} na {self.dia}"
 
 
 class Professor(Pessoa): # SubClasse
@@ -73,10 +74,10 @@ class Professor(Pessoa): # SubClasse
         self.nivel = nivel
 
     def darAula(self):
-        return f"O(a) professor(a) [black on white]{self.nome}[/] começou a dar aula de [orange]{self.tipo}[/] para o(s) aluno(s): {Aluno.alunos}"
+        return f"O(a) professor(a) [black on white]{self._nome}[/] começou a dar aula de [orange]{self.tipo}[/] para o(s) aluno(s): {Aluno.alunos}"
 
     def estaNaAcademia(self):
-        return f"O(a) instrutor(a) {self.nome} de nível {self.nivel} está na academia dando aula de {self.tipo}"
+        return f"O(a) instrutor(a) {self._nome} de nível {self.nivel} está na academia dando aula de {self.tipo}"
 
 
 class Funcionario(Pessoa): # SubClasse
@@ -99,16 +100,16 @@ class Funcionario(Pessoa): # SubClasse
 
     def baterPonto(self):
         if self.pontoBatido:
-            return f"O(a) funcionário(a) [purple]{self.nome}[/] já bateu o ponto"
+            return f"O(a) funcionário(a) [purple]{self._nome}[/] já bateu o ponto"
         else:
             self.pontoBatido = True
-            return f"O(a) funcionário(a) [purple]{self.nome}[/] bateu o ponto"
+            return f"O(a) funcionário(a) [purple]{self._nome}[/] bateu o ponto"
     
     def __str__(self):
         if self.pontoBatido:
-            return f"O(a) funcionário(a) {self.nome} está trabalhando no setor de {self.setor} como {self.cargo}"
+            return f"O(a) funcionário(a) {self._nome} está trabalhando no setor de {self.setor} como {self.cargo}"
         else:
-            return f"O(a) funcionário(a) {self.nome} ainda não bateu o ponto"
+            return f"O(a) funcionário(a) {self._nome} ainda não bateu o ponto"
 
     def estaNaAcademia(self):
-        return f"O(a) funcionário(a) {self.nome} do setor de {self.setor} está na academia trabalhando como {self.cargo}"
+        return f"O(a) funcionário(a) {self._nome} do setor de {self.setor} está na academia trabalhando como {self.cargo}"
