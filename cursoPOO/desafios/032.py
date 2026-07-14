@@ -1,7 +1,8 @@
 # Exercício Conta Bancária (ex006) Aprimorado
 
 import random
-from Credencial030 import Credencial, print, inspect
+from cursoPOO.desafios.desafio030.Credencial030 import Credencial, print
+
 
 class ContaBancaria(Credencial):
     """
