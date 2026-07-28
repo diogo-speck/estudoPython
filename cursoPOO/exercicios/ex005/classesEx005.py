@@ -10,11 +10,11 @@ class Pessoa(ABC): # SuperClasse Abstrata
     alunos = []
     def __init__(self, nome="", idade=0):
         self._nome = nome
-        self.idade = idade
+        self._idade = idade
 
     def fazerAniversario(self):
-        self.idade+=1
-        print(f"{self._nome} fez aniversário ({self.idade} anos)")
+        self._idade+=1
+        print(f"{self._nome} fez aniversário ({self._idade} anos)")
 
     @abstractmethod # Métodos Obrigatórios
     def estaNaAcademia(self):
