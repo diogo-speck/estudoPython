@@ -43,3 +43,9 @@ Em Python há uma convenção, mas ele não proíbe a mudança Exemplo de Python
 Por padrão Público não tem nada antes, Protegido tem um "_" antes e Privado tem "__" antes
 Acesso a dados de Encapsulamento → Getters/"Setters" (métodos acessores tipo Java) e @property (no caso do Python)
 "set" determina o que pode e o que não pode e "get" recebe o valor após passar pelo "set"
+Polimorfismo são as propriedades ou estados que se apresentam e/ou se comportam de várias formas diferentes
+Um único nome, mas com comportamentos diferentes
+Exemplos de polimorfismo no Python são os Overloads de funções e dos operadores
+Na função len() por exemplo, a mesma função conta quantos caracteres tem em uma string, quantos elementos tem em uma lista e em um dicionário
+O operador + serve para indicar um número positivo, somar, concatenar e juntar listas
+3 "tipos" de polimorfismos em Python: Inclusão (sobreposição), Sobrecarga e 'Duck Typing' (método polimórfico)
