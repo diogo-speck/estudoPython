@@ -1,5 +1,3 @@
-#from functools import singledispatchmethod
-
 class Carteira:
 
     def __init__(self, valor:int|float=0):
