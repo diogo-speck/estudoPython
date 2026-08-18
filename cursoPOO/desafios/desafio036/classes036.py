@@ -5,15 +5,15 @@ from abc import ABC, abstractmethod
 class Pagamento(ABC):
     """
         Classe abstrata que instancia um objeto chamado Pagamento onde recebe um valor
-        Possui os atributos -_valor (privada) e +@fvalor (público)
+        Possui os atributos #__valor (protegida) e +@fvalor (público)
         ex. finalizar_compra(metodo, valor)
         Possui 1 abstractmethod:
-        pagar(valor)
+        pagar()
         ex. p1.pagar()
     """
 
     def __init__(self, valor:float=0.0):
-        self._valor = valor
+        self.__valor = valor
     
     @abstractmethod
     def pagar(self):
@@ -21,7 +21,18 @@ class Pagamento(ABC):
 
     @property
     def fvalor(self):
-        return f"R${self._valor:,.2f}"
+        return f"R${self.__valor:,.2f}"
+
+    @property
+    def valor(self):
+        return self.__valor
+    
+    @valor.setter
+    def valor(self, valor:float=0.0):
+        if valor > 0:
+            self.__valor = valor
+        else:
+            raise ValueError("Valor inválido, precisa ser um número positivo")
 
 
 class Boleto(Pagamento):
@@ -37,7 +48,7 @@ class Pix(Pagamento):
         super().__init__(valor)
         
     def pagar(self):
-        print(f"Você pagou {self.fvalor} no pix")
+        print(f"Pagamento CONFIRMADO de {self.fvalor} via pix")
 
 
 class Cartao(Pagamento):
@@ -58,12 +69,12 @@ class Dinheiro(Pagamento):
         
     def pagar(self):
         troco = float(input(f"Você pagou {self.fvalor} no dinheiro. Troco para quanto? "))
-        if troco >= self._valor:
-            print(f"Seu troco será R${(troco-self._valor):,.2f} (Total: {self.fvalor})")
+        if troco >= self.valor:
+            print(f"Seu troco será R${(troco-self.valor):,.2f} (Total: {self.fvalor})")
         else:
             print(f"Quantia inválida, não daremos troco!")
 
     
 def finalizar_compra(metodo, valor):
-    metodo._valor = valor
+    metodo.valor = valor
     metodo.pagar()

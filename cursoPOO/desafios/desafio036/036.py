@@ -1,8 +1,7 @@
 from classes036 import *
 
 def __main__():
-    finalizar_compra(Boleto(), 3_500)
-    #inspect(Pix(), all=True)
+    finalizar_compra(Boleto(), 8_500)
 
 if __name__ == "__main__":
     __main__()
