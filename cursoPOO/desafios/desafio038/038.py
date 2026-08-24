@@ -9,13 +9,12 @@ def __main__():
     print(p1)
 
     c1 = Carrinho()
-    #c2 = Carrinho()
+    c2 = Carrinho()
 
-    c1 += p1
-    #c2 += c1 + p2
-
+    c1 = c1 + p1 + p3 + p4
     print(c1)
-    #print(c2)
+    c2 += c1 + p2
+    print(c2)
 
 if __name__ == "__main__":
     __main__()
