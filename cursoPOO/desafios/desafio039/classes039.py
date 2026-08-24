@@ -73,4 +73,4 @@ class Senha(Validador):
 
 
 def validar_dado(tipo, valor):
-    tipo.validar(valor)
+    return tipo.validar(valor)

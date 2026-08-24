@@ -1,16 +1,57 @@
-# Implemente uma Classe Funcionario, simulando um funcionário com seu salário e bônus salarial
-from rich import print, inspect
-from abc import ABC
+# Implemente duas Classes JSON e XML para exportar dados de maneira funcional
+from desafios.desafio039.classes039 import *
+import random
 
-class Funcionario(ABC):
-    """
-        Classe abstrata que instancia um objeto chamado Funcionario onde recebe um nome e um salário
-        Possui os atributos @nome (público) e @salario (privado)
-        ex. f1 = Funcionario("nome", salario)
-        Possui 1 method:
-        calcular_bônus(valor)
-        ex. f1.calcular_bônus(valor)
-    """
 
-    def __init__(self):
+class JSON():
+    """
+        Classe que exportar dados de maneira funcional em formato JSON
+        Possui o método exportar(objeto())
+    """
+    def exportar(self, objeto):
         pass
+
+
+
+class XML():
+    """
+        Classe que exportar dados de maneira funcional em formato XML
+        Possui o método exportar(objeto())
+    """
+    def exportar(self, objeto):
+        pass
+
+
+class Login():
+    def __init__(self, user, email, senha=""):
+        if not validar_dado(User(), user):
+            self.user = str(random.randint(10000, 99999999999999999999)).zfill(20)
+            print(f"Seu novo usuário: {self.user}")
+        else:
+            self.user = user
+
+        while not validar_dado(Email(), email):
+            email = input("Digite outro e-mail: ")
+        self.email = email
+
+        senha = user+"_123"
+        while not validar_dado(Senha(), senha):
+            senha = input("Digite outro senha: ")
+        self._senha = senha
+
+    def __str__(self):
+        return f'"User" : "{self.user}"; "Email" : "{self.email}"; "Senha" : "{self._senha}"'
+
+class Estudante():
+    def __init__(self, nome, serie="1ª", curso=None):
+        self.nome = nome
+        self.serie = serie
+        self.curso = curso
+
+    def __str__(self):
+        return f'"Nome" : "{self.nome}"; "Serie" : "{self.serie}"; "Curso" : "{self.curso}"'
+
+
+
+def exportar_dados(tipo, objeto):
+    tipo.exportar(objeto)
