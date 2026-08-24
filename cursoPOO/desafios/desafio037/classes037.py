@@ -1,16 +1,30 @@
-# Implemente uma Classe Funcionario, simulando um funcionário com seu salário e bônus salarial
+# Implemente uma Classe Mensagem, simulando um sistema de mensagem padronizadas
 from rich import print, inspect
-from abc import ABC
 
-class Funcionario(ABC):
+class Mensagem():
     """
-        Classe abstrata que instancia um objeto chamado Funcionario onde recebe um nome e um salário
-        Possui os atributos @nome (público) e @salario (privado)
-        ex. f1 = Funcionario("nome", salario)
+        Classe que instancia um objeto chamado Mensagem onde recebe um texto e um tipo
+        Possui os atributos #mensagem (privado), #tipo (privado) e #icone (privado)
+        ex. m1 = Mensagem("texto", tipo)
         Possui 1 method:
-        calcular_bônus(valor)
-        ex. f1.calcular_bônus(valor)
+        mostrar()
+        ex. m1.mostrars()
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, mensagem="", tipo="Mensagem"):
+        self._mensagem = mensagem
+        self._tipo = tipo
+        self._icone = ""
+    
+    def mostrar(self):
+        print(f"{self._tipo}: {self._mensagem} {self._icone}")
+
+class Erro(Mensagem):
+    def __init__(self, mensagem = "", tipo="Erro"):
+        super().__init__(mensagem, tipo)
+        self._icone = "🚫"
+
+class Aviso(Mensagem):
+    def __init__(self, mensagem = "", tipo="Aviso"):
+        super().__init__(mensagem, tipo)
+        self._icone = "❗"
