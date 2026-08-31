@@ -1,7 +1,6 @@
 # Implemente uma Classe Arquivo, simulando a abertura de diferentes tipos de arquivos
 from rich import print, inspect
 from abc import ABC, abstractmethod
-from random import random
 
 class Arquivo(ABC):
     """
@@ -13,14 +12,14 @@ class Arquivo(ABC):
         ex. a1.abrir()
     """
 
-    def __init__(self, nome, extensao, tamanho):
+    def __init__(self, nome:str, extensao:str, tamanho:int=0):
         self.nome = nome
         self.__extensao = extensao
         self.tamanho = tamanho
     
     @property
     def nome_completo(self):
-        return f"'{self.nome}.{self.__extensao}'({self.tamanho/1000000}MB)"
+        return f"'{self.nome}.{self.__extensao}'({(self.tamanho/1048576):,.2f}MB)"
     
     @abstractmethod
     def abrir(self):
