@@ -1,7 +1,9 @@
 # Implemente uma Classe Pagamento, simulando um pagamento de diferentes formas
 from rich import print, inspect
 from abc import ABC, abstractmethod
+import locale
 
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 class Pagamento(ABC):
     """
         Classe abstrata que instancia um objeto chamado Pagamento onde recebe um valor
@@ -21,7 +23,8 @@ class Pagamento(ABC):
 
     @property
     def fvalor(self):
-        return f"R${self.__valor:,.2f}"
+        #return f"R${self.__valor:,.2f}"
+        return locale.currency(self.__valor, grouping=True)
 
     @property
     def valor(self):
@@ -75,6 +78,9 @@ class Dinheiro(Pagamento):
             print(f"Quantia inválida, não daremos troco!")
 
     
-def finalizar_compra(metodo, valor):
-    metodo.valor = valor
-    metodo.pagar()
+def finalizar_compra(metodo: Pagamento, valor: float):
+    try:
+        metodo.valor = valor
+        metodo.pagar()
+    except ValueError as e:
+        print(f"[red]Erro: {e}[/red]")
