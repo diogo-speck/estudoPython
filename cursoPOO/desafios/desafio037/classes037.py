@@ -1,5 +1,6 @@
 # Implemente uma Classe Mensagem, simulando um sistema de mensagem padronizadas
 from rich import print, inspect
+from rich.panel import Panel
 
 class Mensagem():
     """
@@ -14,17 +15,21 @@ class Mensagem():
     def __init__(self, mensagem="", tipo="Mensagem"):
         self._mensagem = mensagem
         self._tipo = tipo
-        self._icone = ""
+        self._icone = "💬"
+        self._cor = ""
     
     def mostrar(self):
-        print(f"{self._tipo}: {self._mensagem} {self._icone}")
+        msg = Panel(f"[white on {self._cor}]{self._mensagem}[/]", title=f"{self._icone}  {self._tipo}  {self._icone}", style="")
+        print(msg)
 
 class Erro(Mensagem):
     def __init__(self, mensagem = "", tipo="Erro"):
         super().__init__(mensagem, tipo)
         self._icone = "🚫"
+        self._cor = "red"
 
 class Aviso(Mensagem):
     def __init__(self, mensagem = "", tipo="Aviso"):
         super().__init__(mensagem, tipo)
-        self._icone = "❗"
+        self._icone = "⚠️"
+        self._cor = "yellow"
