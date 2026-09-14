@@ -1,4 +1,4 @@
-# Implemente uma Classe Mensagem, simulando um sistema de mensagem padronizadas
+# Implemente uma Classe Mensagem, simulando um sistema de mensagens padronizadas
 from rich import print, inspect
 from rich.panel import Panel
 
