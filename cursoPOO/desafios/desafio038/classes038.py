@@ -1,4 +1,4 @@
-# Implemente uma Classe Carrinho, simulando um carrinho de compras
+# Implemente uma Classe Carrinho, simulando um carrinho de compras com agregação incluindo sobrecarga de operador
 
 class Carrinho():
     """
@@ -8,32 +8,38 @@ class Carrinho():
         ex. c1 = Carrinho()
     """
 
-    def __init__(self):
-        self.produtos = []
-        self._valor = 0.0
+    def __init__(self, produtos:list=None):
+        self.produtos = produtos if produtos else []
 
-    def __iadd__ (self, produto):
-        self.produtos.append(produto)
-        self._valor += (produto._valor)
-        return self
+    @property
+    def total(self):
+         return sum(p._valor for p in self.produtos)
 
     def __add__ (self, produto):
-        self.produtos.append(produto)
-        self._valor += (produto._valor)
-        return self
+        if isinstance(produto, Produto):
+            return Carrinho(self.produtos + [produto])
+        elif isinstance(produto, Carrinho):
+            return Carrinho(self.produtos + [produto.produtos])
+        else:
+            raise TypeError("Você tentou adicionar algo inválido ao carrinho")
 
     def __str__(self):
-        sacola = ""
-        for i in self.produtos:
-             sacola+=f"{i}\n"
-        return f"\n{sacola}\nTotal: R$ {self._valor:,.2f}"
-
+        linha = "\n" + "-" * 30 + "\n"
+        itens = "\n".join(str(p) for p in self.produtos)
+        return f"\n{linha}{itens}{linha}Total: {formataDinheiro(self.total)}"
 
 
 class Produto():
-    def __init__(self, item, valor=0.0):
+    def __init__(self, item:str, valor:float=0.0):
             self.item = item
             self._valor = valor
 
     def __str__(self):
-         return f"{self.item} (R$ {self._valor:,.2f})"
+         return f"{self.item} ({formataDinheiro(self._valor)})"
+
+
+
+def formataDinheiro(valor:float):
+    import locale
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+    return locale.currency(valor, grouping=True)
