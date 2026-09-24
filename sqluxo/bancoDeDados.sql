@@ -1,6 +1,6 @@
 -- SQL: Structured Query Language / Linguagem de Consulta
 /* Dar uma olhada em SQLAlchemy, PostgreSQL e azure data studio
-MSSQL
+MSSQL / SQLServer
 */
 GO
 IF DB_ID('meu_banco_de_tras') IS NULL -- Se o banco de dados não existir, cria um novo banco de dados

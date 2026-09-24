@@ -26,3 +26,9 @@ build/
 
 # Dependências
 uv.lock
+
+#Api
+api.py
+
+#Bancos de Dados
+*.db
