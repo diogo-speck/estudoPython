@@ -1,6 +1,7 @@
 # CircoLogicLab
 
 Calculadora visual de lógica booleana feita com Python e Streamlit.
+https://diogospeck.streamlit.app/
 
 ## Funcionalidades iniciais
 
