@@ -11,6 +11,7 @@ print("6 - Sequência de Fibonacci")
 print("7 - Sequência de Números Primos")
 print("8 - Calculadora")
 print("9 - Organizador de lista em ordem crescente")
+print("0 - Comparar dois valores reais")
 
 try:
     escolha = int(input("Escolha: "))
@@ -165,5 +166,20 @@ try:
         print(f"Sua lista tem {len(lista)} valores e ela organizada em ordem crescente fica assim:")
         print(numeros_ordenados)
 
+    elif escolha == 0:
+        try:
+            a = float (input ("Digite um valor para A: "))
+            b = float (input ("Digite um valor para B: "))
+            if a == b:
+                print (f"{a} = {b}")
+            else:
+                print (f"{a} != {b}")
+                if a>b:
+                    print (f"{a} > {b}")
+                else:
+                    print (f"{a} < {b}")
+        except ValueError:
+            print ("Por favor digite números reais respeitando o padrão")
+            
 except ValueError:
     exit()
