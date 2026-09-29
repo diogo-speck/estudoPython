@@ -1,6 +1,8 @@
 # Implemente uma Classe Validador, simulando a validação de dados
 from rich import print, inspect
 from abc import ABC, abstractmethod
+import re # regex
+import datetime
 
 class Validador(ABC):
     """
@@ -71,6 +73,33 @@ class Senha(Validador):
             return False
 
 
+class Data(Validador):
+    """
+    Restrições:
+    - Estar no formato padrão de data no Brasil (DD/MM/AAAA)
+    - Pode separar ou não com /
+    - Dia só até 31, mês 12 e ano atual
+    """
+    def validar(self, data:str):
+        vigente = datetime.datetime.now()
+        regex = r"^[0-9/ ]{3,10}$"
+        if re.fullmatch(regex, data):
+            data = data.replace("/", " ")
+            data = data.replace(" ", "")
+            try:
+                if 1 <= int(data[0:2]) <= 31 and 1 <= int(data[2:4]) <= 12 and 0 <= int(data[4:]) <= vigente.year:
+                    print("[green]Data Válida")
+                    return True
+                else:
+                    print("[red]Data Inválida")
+                    return False
+            except:
+                print("[red]Data Inválida")
+                return False
+        else:
+            print("[red]Data Inválida")
+            return False
 
-def validar_dado(tipo, valor):
+
+def validar_dado(tipo, valor:str):
     return tipo.validar(valor)
