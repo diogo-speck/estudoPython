@@ -1,3 +1,11 @@
+"""import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parents[2]))
+
+from desafios.desafio040.classes040 import *
+
+#gambiarra"""
 from desafios.desafio040.classes040 import *
 
 def __main__():
@@ -13,11 +21,10 @@ def __main__():
         Estudante("Mario", "SEG", "1 per")
     ]
 
-    print(u)
-    print(a)
 
+    exportar_dados(JSON(), a)
+    exportar_dados(XML(), u)
 
-    # exportar_dados(JSON(), u)
 
 if __name__ == "__main__":
     __main__()
