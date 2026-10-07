@@ -1,4 +1,5 @@
 import os
+import random
 
 def confere_data(datas):
     try:
@@ -39,38 +40,53 @@ acertou = False
 gerados = ""
 contador = 0
 tentativas = 0
-sequencia = input("Escolha uma sequência de 3 jogadas de cara/coroa (ex. HTT): ").upper()
 
-while not acertou:
-    while contador < 3:
-        if moeda() == 0:
-            gerados += "H"  # Cara
-        else:
-            gerados += "T"  # Coroa
-        contador += 1
-    contador = 0
+try:
+    sequencia = input("Escolha uma sequência de 3 jogadas de cara/coroa (ex. HTT): ").upper()
 
-    if len(gerados) >= 3:
-        ultimos3 = gerados[-3:]  # pega os últimos 3
-        if ultimos3 == sequencia:
-            print(f"🎉 Você acertou a sequência em {tentativas+1} tentativas!")
-            print(gerados)
-            acertou = True
-        else:
-            tentativas+=1
+    if len(sequencia) != 3 or any(c not in "HT" for c in sequencia):
+        sequencia = "".join("H" if moeda() == 0 else "T" for _ in range(3))
+        print(f"Entrada inválida. Sequência gerada: {sequencia}")
+
+    while not acertou:
+        while contador < 3:
+            if moeda() == 0:
+                gerados += "H"
+            else:
+                gerados += "T"
+
+            contador += 1
+
+        contador = 0
+
+        if len(gerados) >= 3:
+            ultimos3 = gerados[-3:]
+
+            if ultimos3 == sequencia:
+                print(f"Você acertou a sequência em {tentativas+1} tentativas!")
+                print(gerados)
+                acertou = True
+            else:
+                tentativas += 1
+
+except:
+    print()
 
 # Números narcisistas, números de Armstrong ou números pluperfeitos digital
 # número inteiro que é igual à soma dos seus próprios dígitos elevados à potência do número de dígitos que ele possui
 # ex. 153 e 9474
 
-num = input("Digite um número para conferir se ele é um número narcisista: ")
-expoente = len(num)
-soma=sum(int(digito) ** expoente for digito in num)
+try:
+    num = input("Digite um número para conferir se ele é um número narcisista: ")
+    expoente = len(num)
+    soma=sum(int(digito) ** expoente for digito in num)
 
-if soma == int(num):
-    print(f"{num} é narcisista")
-else:
-    print(f"{num} NÃO é narcisista")
+    if soma == int(num):
+        print(f"{num} é narcisista")
+    else:
+        print(f"{num} NÃO é narcisista")
+except:
+    print()
 
 # Chicken McNugget Theorem, Problema da Moeda de Frobenius ou Problema do Selo Postal.
 # Dados dois números inteiros positivos e coprimos (que não dividem o mesmo divisor comum além de 1),
@@ -80,13 +96,48 @@ else:
 # ex. 9 e 20: 9 * 20 - 9 - 20 = 151 → não é possível comprar exatamente 151 nuggets
 # Qualquer número maior que 151 pode ser obtido com alguma combinação de 9 e 20
 
-m = int(input("Digite um número: "))
-n = int(input("Digite outro número: "))
+try:
+    m = int(input("Digite um número: "))
+    n = int(input("Digite outro número: "))
 
-if m<=1 or n<=1: # Dá para formar qualquer sequência com 1
-    print(f"Pelo menos um dos números {m} ou {n} NÃO é maior que 1, logo o Problema da Moeda de Frobenius não funciona")
-elif mdc(m, n) != 1: # Se o maior divisor comum não for 1
-    print(f"Os números {m} e {n} NÃO são coprimos, logo o Problema da Moeda de Frobenius não funciona")
-else:
-    print(f"Os números {m} e {n} são coprimos")
-    print(f"O maior número inteiro que NÃO pode ser escrito como combinação linear de {m} e {n} é: {m*n - m - n}")
+    if m<=1 or n<=1: # Dá para formar qualquer sequência com 1
+        print(f"Pelo menos um dos números {m} ou {n} NÃO é maior que 1, logo o Problema da Moeda de Frobenius não funciona")
+    elif mdc(m, n) != 1: # Se o maior divisor comum não for 1
+        print(f"Os números {m} e {n} NÃO são coprimos, logo o Problema da Moeda de Frobenius não funciona")
+    else:
+        print(f"Os números {m} e {n} são coprimos")
+        print(f"O maior número inteiro que NÃO pode ser escrito como combinação linear de {m} e {n} é: {m*n - m - n}")
+except:
+    print()
+
+
+# Quadrado Mágico
+
+def gerarQuadrado(lado):
+    try:
+        intervalo = lado ** 2
+        if lado > 0 and lado != 2:
+            
+            soma = intervalo*(intervalo+1)/2
+            media = round(soma/intervalo)
+            quadrado = [[0 for _ in range(lado)] for _ in range(lado)]
+            constM = intervalo*(intervalo**2+1)/2
+            for i in range(lado):
+                print()
+                for j in range(lado):
+                    while quadrado[i][j] == 0:
+                        numero = random.randint(1,intervalo)
+                        if all(numero not in linha for linha in quadrado):
+                            quadrado[i][j] = numero
+                    print(f"{quadrado[i][j]} ", end="")
+            
+            # Quadrado gerado sem repetição
+        else:
+            raise Exception
+    except:
+        print("Valor inválido")
+
+
+tamanho = int(input("Digite o tamanho do lado do quadrado mágico: "))
+gerarQuadrado(tamanho)
+print()
