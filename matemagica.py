@@ -111,33 +111,106 @@ except:
     print()
 
 
+
 # Quadrado Mágico
 
 def gerarQuadrado(lado):
     try:
         intervalo = lado ** 2
-        if lado > 0 and lado != 2:
-            
-            soma = intervalo*(intervalo+1)/2
-            media = round(soma/intervalo)
+
+        if lado > 0 and lado != 2 and not lado % 2 == 0:
+
+            # Constante mágica
+            constM = lado * (lado ** 2 + 1) / 2
+
+            # Cria matriz vazia
             quadrado = [[0 for _ in range(lado)] for _ in range(lado)]
-            constM = intervalo*(intervalo**2+1)/2
-            for i in range(lado):
+
+            # -----------------------------------
+            # MÉTODO SIAMÊS
+            # -----------------------------------
+
+            # 1 começa no meio da primeira linha
+            linha = 0
+            coluna = lado // 2
+
+            quadrado[linha][coluna] = 1
+
+            # Coloca os números restantes
+            for numero in range(2, intervalo + 1):
+
+                # Tenta subir uma linha e avançar uma coluna
+                novaLinha = linha - 1
+                novaColuna = coluna + 1
+
+                # Se sair por cima, volta para baixo
+                if novaLinha < 0:
+                    novaLinha = lado - 1
+
+                # Se sair pela direita, volta para esquerda
+                if novaColuna >= lado:
+                    novaColuna = 0
+
+                # Se a posição estiver ocupada,
+                # desce uma linha a partir da posição atual
+                if quadrado[novaLinha][novaColuna] != 0:
+                    linha += 1
+
+                    # Se sair por baixo, volta para cima
+                    if linha >= lado:
+                        linha = 0
+                else:
+                    # Caso contrário, aceita a nova posição
+                    linha = novaLinha
+                    coluna = novaColuna
+
+                quadrado[linha][coluna] = numero
+
+            # -----------------------------------
+            # VARIAÇÃO ALEATÓRIA
+            # -----------------------------------
+
+            # Rotaciona aleatoriamente
+            rotacoes = random.randint(0, 3)
+
+            for _ in range(rotacoes):
+                quadrado = [list(linha) for linha in zip(*quadrado[::-1])]
+
+            # Reflexão aleatória
+            if random.choice([True, False]):
+                quadrado.reverse()
+
+            # Outra reflexão aleatória
+            if random.choice([True, False]):
+                for linha in quadrado:
+                    linha.reverse()
+
+            # -----------------------------------
+            # MOSTRAR RESULTADO
+            # -----------------------------------
+
+            print(f"\nConstante mágica: {int(constM)}")
+            print()
+
+            for linha in quadrado:
+                for numero in linha:
+                    print(f"{numero:3}", end=" ")
                 print()
-                for j in range(lado):
-                    while quadrado[i][j] == 0:
-                        numero = random.randint(1,intervalo)
-                        if all(numero not in linha for linha in quadrado):
-                            quadrado[i][j] = numero
-                    print(f"{quadrado[i][j]} ", end="")
-            
-            # Quadrado gerado sem repetição
+
+        elif lado > 0 and lado != 2 and lado % 2 == 0:
+            print("Quadrado Par")
+
         else:
             raise Exception
+
     except:
         print("Valor inválido")
 
 
 tamanho = int(input("Digite o tamanho do lado do quadrado mágico: "))
 gerarQuadrado(tamanho)
-print()
+
+#lado = 2       → impossível
+#lado ímpar     → Siamês
+#lado % 4 == 0  → método para parmente par
+#lado % 4 == 2  → Strachey
