@@ -1,0 +1,9 @@
+[Endereços Válidos]:
+192.168.1.1
+10.0.0.1
+8.8.8.8
+
+[Endereços Inválidos]:
+256.1.1.1
+192.168.1
+abc.def.ghi.jkl
