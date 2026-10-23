@@ -9,7 +9,7 @@ Adapte o código do exercício 18 para que a saída do script:
 - Mostre a idade real da pessoa.
 """
 
-busca = input("O que você procura? ").strip()
+busca = input("Quem você procura? ").strip()
 
 
 arquivo = "/home/diogospeck/Documents/Prog/estudoPython/sqluxo/sql/dataset/banco.db"
@@ -29,14 +29,23 @@ try:
 
         
         total = 0
-        cur.execute(f"SELECT * FROM pessoas WHERE nome LIKE ?", (f"%{busca}%",)) # invés de '%{busca}%' (sqlInjection)
+        cur.execute(f"SELECT * FROM pessoas WHERE 1=1 AND nome LIKE ? LIMIT 15", (f"%{busca}%",)) # invés de '%{busca}%' (sqlInjection)
         
         for total, item in enumerate(cur, start=1): # equivalente a fetchone() (ponteiro para uma tupla de cada vez)
-            print(f"{item['id']} - {item['nome']} nasceu em {"Data Inválida" if (datetime.strptime(item['data'], "%Y-%m-%d") == ValueError) else item['data']}")
+            print(f"{item['id']} - {item['nome']} ", end="")
+            try:
+                data = datetime.strptime(item['data'], "%Y-%m-%d")
+                if data > datetime.now():
+                    raise ValueError
+                idade = datetime.now().year-data.year
+                if not (datetime.now().month > data.month or (datetime.now().month == data.month and datetime.now().day >= data.day)):
+                    idade-=1
+                print(f"nasceu em {datetime.strftime(data, '%d/%m/%Y')} e tem {(idade)} ano(s)")
 
-        print(f"{("Nenhum item encontrado" if total == 0 else f"{total} Item(s) encontrado(s)")}")
+            except ValueError:
+                print("está com a Data Inválida")
 
-
+        print(f"{("Nenhum registro encontrado" if total == 0 else f"{total} Item(s) encontrado(s)")}")
 
 
         cur.execute("CREATE TABLE IF NOT EXISTS pessoas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR(100), data TEXT STRICT)")
